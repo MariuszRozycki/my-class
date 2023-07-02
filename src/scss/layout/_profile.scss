@@ -1,0 +1,33 @@
+.log-out {
+  & i {
+    font-size: 25px;
+  }
+}
+
+.img-wrapper {
+  width: 100%;
+  height: 200px;
+}
+
+.profile-img {
+  width: 200px;
+}
+
+.post-list-item {
+  list-style: decimal;
+}
+
+.wrapper-posts-list li,
+.wrapper-follow-list li {
+  color: $thertiary;
+
+  a {
+    text-decoration: none;
+    color: $thertiary;
+    transition: .2s;
+
+    &:hover {
+      color: $hover;
+    }
+  }
+}

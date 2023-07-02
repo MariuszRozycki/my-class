@@ -1,0 +1,11 @@
+.btn.btn-profile,
+.btn.btn-feed {
+  background-color: $thertiary;
+  border: 1px solid $thertiary;
+  transition: .2s;
+
+  &:hover {
+    background-color: $hover;
+    border-color: $hover;
+  }
+}
