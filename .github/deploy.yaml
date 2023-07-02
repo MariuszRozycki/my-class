@@ -26,7 +26,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         source: "dist/*"
-        target: "/path/to/your/directory/on/server"
+        target: "https://mariuszrozycki.info/my-class/"
 
     - name: Execute ssh commands
       uses: appleboy/ssh-action@master
