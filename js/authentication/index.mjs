@@ -1,4 +1,4 @@
-import { getDataFromAuthenticationForm } from "./login.mjs";
+import { userToRegister } from "./login.mjs";
 
 const loginButton = document.querySelector('button[type="submit"]');
-loginButton.addEventListener('click', getDataFromAuthenticationForm);
+loginButton.addEventListener('click', userToRegister);

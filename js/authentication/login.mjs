@@ -1,6 +1,6 @@
 // In function isValidEmail 'email &&' is chcecking 
 // if email isn't empty string or null or undefined
-export const getDataFromAuthenticationForm = () => {
+export const userToRegister = () => {
   const emailValue = document.querySelector('#email').value;
   const loginError = document.querySelector('.login-error');
 
