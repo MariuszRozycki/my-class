@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
-<body class="body-profile">
+<body class="body-profile bg-primary">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-sm ">
       <a class="navbar-brand" href="/feed">MyClass</a>
@@ -46,8 +46,8 @@
   </header>
   <section class="posts text-light">
     <div class="container-md bg-secondary mt-3 p-2">
-      <div class="row">
-        <div class="col-12 text-center text-light">
+      <div class="row mx-0">
+        <div class="col-12 text-center text-light px-0">
           <h2>Lasts posts</h2>
         </div>
 
@@ -62,11 +62,11 @@
       </div>
     </div>
 
-    <div class="container-md p-1">
+    <div class="container-md px-0 py-1">
       <div class="card-group gap-1">
-        <div class="card text-light">
+        <div class="card rounded-0 text-light">
           <div class="img-wrapper">
-            <img src="../../images/dubrovnik_1000px_w.jpg" class="card-img-top" alt="Dubrownik">
+            <img src="../../images/dubrovnik_1000px_w.jpg" class="card-img-top rounded-0" alt="Dubrownik">
           </div>
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">How did I discovered
@@ -80,9 +80,9 @@
             </p>
           </div>
         </div>
-        <div class="card text-light">
+        <div class="card rounded-0 text-light">
           <div class="img-wrapper">
-            <img src="../../images/kotor_1000px_w.jpg" class="card-img-top" alt="Kotor">
+            <img src="../../images/kotor_1000px_w.jpg" class="card-img-top rounded-0" alt="Kotor">
           </div>
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">Beautiful Kotor!</h5>
@@ -97,9 +97,9 @@
             </p>
           </div>
         </div>
-        <div class="card text-light">
+        <div class="card rounded-0 text-light">
           <div class="img-wrapper">
-            <img src="../../images/war-maz3_600px_w.jpg" class="card-img-top" alt="Dinner">
+            <img src="../../images/war-maz3_600px_w.jpg" class="card-img-top rounded-0" alt="Dinner">
           </div>
           <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">Fast food!</h5>
@@ -121,17 +121,17 @@
         <div class="col-12 d-sm-flex justify-content-center">
           <form action="">
             <div class="mb-1">
-              <label for="formFile" class="form-label text-light">Add picture to post</label>
+              <label for="formFile" class="form-label text-light">Add picture</label>
               <input class="form-control" type="file" id="formFile">
             </div>
             <div class="form-floating mb-1">
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></textarea>
-              <label for="floatingTextarea1">Add title of your post</label>
+              <label for="floatingTextarea1">Add title</label>
             </div>
             <div class="form-floating">
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
                 style="height: 100px"></textarea>
-              <label for="floatingTextarea2">Add text content to your post</label>
+              <label for="floatingTextarea2">Add text content</label>
             </div>
             <button class="btn btn-my mt-2" type="submit">Add post</button>
           </form>
