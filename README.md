@@ -7,5 +7,6 @@
 3. Install the dependencies with `npm install`.
 4. Build the project with `npm run build`.
 5. Start watching for changes and launch the live server with `npm run watch`.
+6. Creating and watching JSDocs `npm run docs`.
 
 

@@ -1,4 +1,5 @@
-export const baseApi = 'https://api.noroff.dev/api/v1';
+import { loginUser } from "./authentication/index.mjs";
+loginUser();
 
 
 

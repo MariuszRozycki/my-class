@@ -1,8 +1,12 @@
 import { noroffUser } from "./login.mjs";
 
-const loginButton = document.querySelector('button[type="submit"]');
-loginButton.addEventListener('click', e => {
-  e.preventDefault();
-  const user = noroffUser();
-  console.log(user);
-});
+export const loginUser = () => {
+  const loginButton = document.querySelector('button[type="submit"]');
+  loginButton.addEventListener('click', e => {
+    e.preventDefault();
+    const emailValue = document.querySelector('#email').value;
+    const passwordValue = document.querySelector('#password').value;
+    const user = noroffUser(emailValue, passwordValue);
+    console.log(user);
+  });
+}
