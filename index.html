@@ -21,17 +21,18 @@
             <p>Login and enjoy!</p>
           </div>
           <div class="col-12 d-flex flex-column justify-content-center align-items-center p-4">
-            <form action="profile/" class="col-12">
+            <form action="" class="col-12">
               <div class="form-group text-white">
                 <label class="py-1" for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control bg-light" id="email" aria-describedby="emailHelp"
                   placeholder="Enter email required">
-                <p class="login-error d-none">Email must contain @noroff.no or @stud.noroff.no</p>
+                <p class="email-error d-none">Email must contain @noroff.no or @stud.noroff.no</p>
               </div>
               <div class="form-group text-white mt-3">
                 <label class="py-1" for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control bg-light" id="password" placeholder="Password" minlength="8"
                   required>
+                <p class="password-error d-none">Password must be min 8 characters long</p>
               </div>
               <button type="submit" class="btn btn-secondary mt-3 text-white col-12">Log
                 in</button>
