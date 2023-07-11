@@ -11898,6 +11898,7 @@ li {
   border: 2px solid rgb(66, 66, 66);
 }
 
+.name-error,
 .email-error,
 .password-error {
   margin-top: 5px;
