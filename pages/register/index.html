@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Class || Register</title>
   <link rel="stylesheet" href="../../dist/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body class="body-authentication">
@@ -22,24 +23,35 @@
           </div>
           <div class="col-12 d-flex flex-column justify-content-center align-items-center p-4">
             <form action="" class="col-12">
+              <p id="user-registered" class="d-none text-white text-bg-success p-2 rounded">New user is
+                registered!<br><a class="text-warning" href="/">Click here</a> to
+                get to login window.</p>
+              <p id="user-not-registered" class="d-none text-white text-bg-danger p-2 rounded"></p>
               <div class="form-group text-white">
                 <label for="userName" class="form-label">User name</label>
                 <input type="text" class="form-control bg-light" id="userName" placeholder="Type name">
-                <p class="name-error d-none">Field can't be empty, must not contain punctuation symbols apart from
+                <!-- <p class="name-error d-none">Field can't be empty, must not contain punctuation symbols apart from
                   underscore
-                  (_).</p>
+                  (_).</p> -->
+                <p class="name-error d-none"></p>
               </div>
               <div class="form-group text-white mt-2">
                 <label class="py-1" for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control bg-light" id="email" aria-describedby="emailHelp"
                   placeholder="Enter email required">
-                <p class="email-error d-none">Email must contain @noroff.no or @stud.noroff.no</p>
+                <!-- <p class="email-error d-none">Email must contain @noroff.no or @stud.noroff.no</p> -->
+                <p class="email-error d-none"></p>
               </div>
               <div class="form-group text-white mt-2">
                 <label class="py-1" for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control bg-light" id="password" placeholder="Password" minlength="8"
-                  required>
-                <p class="password-error d-none">Password must be min 8 characters long</p>
+                <div class="position-relative">
+                  <input type="password" class="form-control bg-light" id="password" placeholder="Password"
+                    minlength="8" required>
+                  <i class="fa fa-eye password-toggle text-dark position-absolute top-50 start-100 translate-middle"
+                    aria-hidden="true"></i>
+                </div>
+                <!-- <p class="password-error d-none">Password must be min 8 characters long</p> -->
+                <p class="password-error d-none"></p>
               </div>
               <button id="btn-sign-up" type="submit" class="btn btn-secondary mt-3 text-white col-12">Sign up!</button>
               <p class="text-warning py-3">Are you registered? <a href="../../" class="text-warning">Log in!</a></p>

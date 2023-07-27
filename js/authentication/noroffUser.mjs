@@ -46,6 +46,7 @@ export function validateUser(userName, email, password) {
     nameError.classList.add('d-none');
   } else {
     nameError.classList.remove('d-none');
+    nameError.innerText = `Niepoprawna nazwa uzytkownika`;
   }
 
   if (isValidEmail(email)) {
@@ -65,3 +66,5 @@ export function validateUser(userName, email, password) {
   return user;
 
 }
+
+

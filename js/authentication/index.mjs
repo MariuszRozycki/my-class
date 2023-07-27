@@ -1,11 +1,17 @@
 /* import functions */
+import { handlePasswordVisibility } from "../utils/passwordVisibility.mjs";
 import { validateUser } from "./validateUser.mjs";
 import { registerUser } from "./registerUser.mjs";
 import { loginUser } from "./login.mjs";
 
 /* import url */
+import { baseApi } from "../utils/api.mjs";
 import { registerUrl } from "../utils/api.mjs";
 import { loginUrl } from "../utils/api.mjs";
+
+window.onload = function () {
+  handlePasswordVisibility();
+};
 
 const signUpButton = document.querySelector('#btn-sign-up');
 

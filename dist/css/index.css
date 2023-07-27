@@ -11909,6 +11909,11 @@ li {
   border-radius: 0.375rem;
 }
 
+.password-toggle {
+  right: -60px;
+  cursor: pointer;
+}
+
 .log-out i {
   font-size: 25px;
 }
