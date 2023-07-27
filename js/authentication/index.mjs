@@ -1,27 +1,27 @@
-import { baseApi } from "../utils/api.mjs";
-import { registerNoroffUser } from "./registration.mjs";
-import { loginUrl } from "../utils/api.mjs";
+/* import functions */
+import { validateUser } from "./validateUser.mjs";
+import { registerUser } from "./registerUser.mjs";
 import { loginUser } from "./login.mjs";
 
-/**
- * function loginUser is a wrapper for norofUser
- * it is used here to help to call function noroffUser
- * with all parameters in file main.mjs
- */
+/* import url */
+import { registerUrl } from "../utils/api.mjs";
+import { loginUrl } from "../utils/api.mjs";
 
-// export const loginUser = () => {
-const loginButton = document.querySelector('button[type="submit"]');
-loginButton.addEventListener('click', e => {
-  e.preventDefault();
-  const nameValue = document.querySelector('#userName').value;
-  const emailValue = document.querySelector('#email').value;
-  const passwordValue = document.querySelector('#password').value;
+const signUpButton = document.querySelector('#btn-sign-up');
 
-  const user = registerNoroffUser(nameValue, emailValue, passwordValue);
+if (signUpButton) {
+  signUpButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-  loginUser(loginUrl, user);
-});
-// }
+    const userName = document.querySelector('#userName').value;
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+
+    const user = validateUser(userName, email, password);
+    console.log('user:', user);
+    registerUser(registerUrl, user);
+  });
+}
 
 
 

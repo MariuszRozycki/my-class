@@ -1,4 +1,4 @@
-export async function loginUser(url, userData) {
+export async function registerUser(url, userData) {
   console.log(url, userData);
   try {
     const postData = {
@@ -17,4 +17,3 @@ export async function loginUser(url, userData) {
     console.error(error);
   }
 }
-
