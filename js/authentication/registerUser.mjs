@@ -32,10 +32,9 @@ export async function registerUser(url, userData) {
 
     const response = await fetch(url, postData);
     const json = await response.json();
+    console.log(json);
 
     if (response.ok) {
-
-
       userRegisterSuccess.classList.remove('d-none');
       userRegisterFailure.classList.add('d-none');
     }

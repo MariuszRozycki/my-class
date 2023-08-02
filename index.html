@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Class || Authentication</title>
   <link rel="stylesheet" href="dist/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body class="body-authentication">
@@ -30,11 +31,15 @@
               </div>
               <div class="form-group text-white mt-2">
                 <label class="py-1" for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control bg-light" id="password" placeholder="Password" minlength="8"
-                  required>
+                <div class="position-relative">
+                  <input type="password" class="form-control bg-light" id="password" placeholder="Password"
+                    minlength="8" required>
+                  <i class="fa fa-eye password-toggle text-dark position-absolute top-50 start-100 translate-middle"
+                    aria-hidden="true"></i>
+                </div>
                 <p class="password-error d-none">Password must be min 8 characters long</p>
               </div>
-              <button type="submit" class="btn btn-secondary mt-3 text-white col-12">Log
+              <button id="btn-log-in" type="submit" class="btn btn-secondary mt-3 text-white col-12">Log
                 in</button>
               <p class="text-warning py-3">Don't have an account? <a href="pages/register/" class="text-warning">Sign
                   up!</a></p>

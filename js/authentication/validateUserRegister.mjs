@@ -30,7 +30,7 @@ const isValidPassword = password => {
   return password && password.length >= 8;
 }
 
-export function validateUser(userName, email, password) {
+export function validateUserRegister(userName, email, password) {
   let user = {
     "name": "",
     "email": "",
