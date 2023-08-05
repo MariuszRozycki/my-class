@@ -1,5 +1,4 @@
 export async function loginUser(url, userData) {
-  console.log(url, userData);
   try {
     const postData = {
       method: "POST",
@@ -10,11 +9,18 @@ export async function loginUser(url, userData) {
     }
     const response = await fetch(url, postData);
     const json = await response.json();
-    console.log(json);
-    const accessToken = json.accessToken;
-    localStorage.setItem('ACCESS_TOKEN', accessToken);
 
-    if (!response.ok) {
+    // const accessToken = json.accessToken;
+    // localStorage.setItem('ACCESS_TOKEN', accessToken);
+
+    // const userProfileData = { ...json };
+    // delete userProfileData.accessToken;
+    // localStorage.setItem('USER_DATA', JSON.stringify(userProfileData));
+
+    if (response.ok) {
+      window.location.href = "../../pages/feed";
+    }
+    else {
       const emailError = document.querySelector('.email-error');
       const passwordError = document.querySelector('.password-error');
 
@@ -48,4 +54,3 @@ export async function loginUser(url, userData) {
     throw error;
   }
 }
-

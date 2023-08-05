@@ -17,6 +17,7 @@
  */
 
 export async function registerUser(url, userData) {
+  console.log('url in registerUser:', url);
 
   const userRegisterFailure = document.querySelector('#user-not-registered');
   const userRegisterSuccess = document.querySelector('#user-registered');
@@ -32,7 +33,7 @@ export async function registerUser(url, userData) {
 
     const response = await fetch(url, postData);
     const json = await response.json();
-    console.log(json);
+    console.log(json);// console.log --> remove before submitting
 
     if (response.ok) {
       userRegisterSuccess.classList.remove('d-none');

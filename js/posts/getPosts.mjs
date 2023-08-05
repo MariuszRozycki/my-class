@@ -1,11 +1,8 @@
-import { postsUrl } from "../utils/api.mjs";
+import { createPostsHtml } from "./createPostHtml.mjs";
 
-export async function getWithToken(url) {
-  console.log(url);
-
+export async function getPosts(url) {
   try {
     const token = localStorage.getItem('ACCESS_TOKEN');
-    console.log(token);
     const fetchOptions = {
       method: "GET",
       headers: {
@@ -16,11 +13,22 @@ export async function getWithToken(url) {
     const response = await fetch(url, fetchOptions);
     const json = await response.json();
 
-    console.log(json);
+
+    for (let post of json) {
+      const { body, created, media, title, } = post;
+
+      console.log(post);
+      createPostsHtml(media, title, body, created);
+    }
+
+    return json;
 
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
-getWithToken(postsUrl);
+
+
+
+

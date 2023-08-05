@@ -1,5 +1,6 @@
-// import { loginUser } from "./authentication/index.mjs";
-// loginUser();
+import { registerAndLoginHandlers } from "./authentication/index.mjs";
+
+registerAndLoginHandlers();
 
 
 

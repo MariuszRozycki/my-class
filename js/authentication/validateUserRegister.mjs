@@ -30,11 +30,13 @@ const isValidPassword = password => {
   return password && password.length >= 8;
 }
 
-export function validateUserRegister(userName, email, password) {
+export function validateUserRegister(userName, email, password, avatar, banner) {
   let user = {
     "name": "",
     "email": "",
     "password": "",
+    "avatar": "",
+    "banner": ""
   }
 
   const nameError = document.querySelector('.name-error');
@@ -61,6 +63,10 @@ export function validateUserRegister(userName, email, password) {
   } else {
     passwordError.classList.remove('d-none');
   }
+
+  user.avatar = avatar ? avatar : "";
+  user.banner = banner ? banner : "";
+
 
   return user;
 
