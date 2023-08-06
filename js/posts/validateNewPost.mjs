@@ -1,11 +1,11 @@
 export function validateNewPost(userName, email, password, avatar, banner) {
-  let user = {
-    "title": "string",
-    "body": "string",
+  let newPost = {
+    "title": "",
+    "body": "",
     "tags": [
-      "string"
+      ""
     ],
-    "media": "string"
+    "media": ""
   }
 
   const nameError = document.querySelector('.name-error');

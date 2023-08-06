@@ -1,8 +1,10 @@
-import { createPostsHtml } from "./createPostHtml.mjs";
+import { getPostHtml } from "./getPostHtml.mjs";
+
 
 export async function getPosts(url) {
   try {
     const token = localStorage.getItem('ACCESS_TOKEN');
+
     const fetchOptions = {
       method: "GET",
       headers: {
@@ -10,15 +12,23 @@ export async function getPosts(url) {
         Authorization: `Bearer ${token}`,
       },
     }
+
+
     const response = await fetch(url, fetchOptions);
     const json = await response.json();
 
-
     for (let post of json) {
-      const { body, created, media, title, } = post;
+      const { media, body, created, title, author: { name, avatar } } = post;
 
-      console.log(post);
-      createPostsHtml(media, title, body, created);
+      const date = new Date(created);
+
+      const localDate = date.toLocaleDateString('en-GB');
+      const localTime = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+
+      const dateAndTime = `${localDate} ${localTime}`;
+      console.log(dateAndTime);
+
+      getPostHtml(media, avatar, title, body, dateAndTime, name);
     }
 
     return json;
@@ -28,7 +38,3 @@ export async function getPosts(url) {
     throw error;
   }
 }
-
-
-
-

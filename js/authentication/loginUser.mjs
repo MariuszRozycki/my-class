@@ -10,12 +10,12 @@ export async function loginUser(url, userData) {
     const response = await fetch(url, postData);
     const json = await response.json();
 
-    // const accessToken = json.accessToken;
-    // localStorage.setItem('ACCESS_TOKEN', accessToken);
+    const accessToken = json.accessToken;
+    localStorage.setItem('ACCESS_TOKEN', accessToken);
 
-    // const userProfileData = { ...json };
-    // delete userProfileData.accessToken;
-    // localStorage.setItem('USER_DATA', JSON.stringify(userProfileData));
+    const userProfileData = { ...json };
+    delete userProfileData.accessToken;
+    localStorage.setItem('USER_DATA', JSON.stringify(userProfileData));
 
     if (response.ok) {
       window.location.href = "../../pages/feed";
