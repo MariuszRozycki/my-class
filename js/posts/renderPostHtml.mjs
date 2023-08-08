@@ -1,4 +1,6 @@
-export function getPostHtml(media, avatar, title, body, created, name) {
+import { renderDateAndTime } from "../utils/createDateAndTime.mjs";
+
+export function renderPostHtml(media, avatar, title, body, created, name) {
 
   const notExists = `Not exists`;
   const imgNotExists = '../../images/not-img.png';
@@ -11,6 +13,8 @@ export function getPostHtml(media, avatar, title, body, created, name) {
   body = body || notExists;
   created = created || notExists;
 
+  const dateInNorway = renderDateAndTime(created);
+
 
   const cardContainer = document.querySelector('.card-container');
 
@@ -22,7 +26,7 @@ export function getPostHtml(media, avatar, title, body, created, name) {
     <div class="card-body p-1 d-flex flex-column justify-content-between">
       <h5 class="card-title">Title: ${title}</h5>
       <p class="card-text">Content: ${body}</p>
-      <p class="card-text p-2 mt-3 text-end"><small>Created: ${created}</small></p>
+      <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
       <div class="user-identification d-flex justify-content-start align-items-center">
         <div class="avatar-img-wrapper">
           <img class="rounded-circle border border-3 border-warning" src="${avatar}">

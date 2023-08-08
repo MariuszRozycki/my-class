@@ -47,25 +47,34 @@
         </div>
       </div>
   </header>
-  <section class="create-pos">
-    <div class="container-md bg-secondary mt-3 py-3">
+  <section class="create-post">
+    <div class="container-md bg-secondary mt-3 p-2">
+      <div class="row mx-0">
+        <div class="col-12 text-center text-light px-0">
+          <h2>Create new post</h2>
+        </div>
+      </div>
+    </div>
+    <div class="container-md bg-secondary py-3">
       <div class="row">
         <div class="col-12 d-sm-flex justify-content-center">
           <form action="">
-            <div class="mb-1">
-              <label for="banner" class="form-label text-light">Add picture</label>
-              <input class="form-control" type="url" id="banner">
-              <p class="text-warning py-3">Need a host for your banner? <a class="text-light"
-                  href="https://photos.google.com/" target="_blank">Upload it here!</a></p>
+            <div class="form-floating mb-1">
+              <input class="form-control" type="url" id="banner" placeholder="Paste url">
+              <label for="banner">Paste Url</label>
             </div>
             <div class="form-floating mb-1">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea1"></textarea>
-              <label for="floatingTextarea1">Add title</label>
+              <textarea class="form-control" placeholder="Add title" id="new-title"></textarea>
+              <label for="new-title">Add title</label>
+            </div>
+            <div class="form-floating mb-1">
+              <textarea class="form-control" placeholder="Add post content" id="new-post-content"
+                style="height: 100px"></textarea>
+              <label for="new-post-content">Add text content</label>
             </div>
             <div class="form-floating">
-              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
-                style="height: 100px"></textarea>
-              <label for="floatingTextarea2">Add text content</label>
+              <input class="form-control" type="text" placeholder="Add tag" id="new-tag">
+              <label for="new-tag">Add tag</label>
             </div>
             <button class="btn btn-my mt-2" type="submit">Add post</button>
           </form>

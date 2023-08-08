@@ -1,5 +1,4 @@
-import { getPostHtml } from "./getPostHtml.mjs";
-
+import { renderPostHtml } from "./getPostHtml.mjs";
 
 export async function getPosts(url) {
   try {
@@ -13,22 +12,13 @@ export async function getPosts(url) {
       },
     }
 
-
     const response = await fetch(url, fetchOptions);
     const json = await response.json();
 
     for (let post of json) {
       const { media, body, created, title, author: { name, avatar } } = post;
 
-      const date = new Date(created);
-
-      const localDate = date.toLocaleDateString('en-GB');
-      const localTime = date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-      const dateAndTime = `${localDate} ${localTime}`;
-      console.log(dateAndTime);
-
-      getPostHtml(media, avatar, title, body, dateAndTime, name);
+      renderPostHtml(media, avatar, title, body, created, name);
     }
 
     return json;
