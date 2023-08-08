@@ -1,4 +1,4 @@
-import { renderPostHtml } from "./getPostHtml.mjs";
+import { renderPostHtml } from "./renderPostHtml.mjs";
 
 export async function getPosts(url) {
   try {

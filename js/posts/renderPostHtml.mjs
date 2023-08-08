@@ -1,4 +1,4 @@
-import { renderDateAndTime } from "../utils/createDateAndTime.mjs";
+import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 
 export function renderPostHtml(media, avatar, title, body, created, name) {
 
