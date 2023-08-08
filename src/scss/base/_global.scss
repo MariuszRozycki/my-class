@@ -1,4 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+.body-registration {
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  height: auto;
+  margin: 0 auto;
+}
+
 .body-authentication {
+  height: 100vh;
+  margin: 0;
+}
+
+
+.body-authentication,
+.body-registration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: $secondary;
 }
 

@@ -1,0 +1,9 @@
+{
+  "source": {
+    "includePattern": ".+\\.m?js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "recurse": true
+  }
+}
