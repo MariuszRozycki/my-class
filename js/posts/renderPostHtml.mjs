@@ -1,14 +1,22 @@
+import { fetchExternalImage } from "../utils/fetchExternalPic.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 
-export function renderPostHtml(media, avatar, title, body, created, name) {
+export async function renderPostHtml(media, avatar, title, body, created, name) {
 
   const notExists = `Not exists`;
   const imgNotExists = '../../images/not-img.png';
   const avatarNotExists = '../../images/profile-default.png'
 
   avatar = avatar || avatarNotExists;
-  // banner = banner || imgNotExists;
+
+  if (media) {
+    if (!media.startsWith("http://imgur") && !media.startsWith("https://i.imgur")) {
+      media = await fetchExternalImage(media);
+      console.log(media);
+    }
+  }
   media = media || imgNotExists;
+
   title = title || notExists;
   body = body || notExists;
   created = created || notExists;
