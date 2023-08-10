@@ -1,31 +1,24 @@
-export async function createNewPost(url, data) {
-  try {
-    const token = localStorage.getItem('ACCESS_TOKEN');
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-    }
-    const response = await fetch(url, fetchOptions);
-    const json = await response.json();
+/* import functions */
+import { authWithToken } from "../authentication/authWithToken.mjs";
+import { newPostData } from "./newPostData.mjs";
 
-    console.log(json);
+/* import Url */
+import { postsUrl } from "../utils/api.mjs";
 
+export async function createNewPost() {
+  const method = 'POST';
+  const newPostForm = document.querySelector('#new-post-form');
 
-    console.log(json);
+  newPostForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-    return json;
+    const newTitle = document.querySelector('#new-title').value;
+    const newTextContent = document.querySelector('#new-post-content').value;
+    const newTag = document.querySelector('#new-tag').value;
+    const newBanner = document.querySelector('#banner').value;
 
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+    const json = newPostData(newTitle, newTextContent, newTag, newBanner);
+    console.log('json', json);
+    authWithToken(method, postsUrl, json);
+  });
 }
-
-
-
-
-

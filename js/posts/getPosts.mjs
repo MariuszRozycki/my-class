@@ -1,29 +1,12 @@
-import { renderPostHtml } from "./renderPostHtml.mjs";
+/* import functions */
+import { authWithToken } from "../authentication/authWithToken.mjs";
+import { renderPost } from "./renderPost.mjs";
 
-export async function getPosts(url) {
-  try {
-    const token = localStorage.getItem('ACCESS_TOKEN');
+/* import url */
+import { postsUrl } from "../utils/api.mjs";
 
-    const fetchOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const response = await fetch(url, fetchOptions);
-    const json = await response.json();
-
-    for (let post of json) {
-      const { media, body, created, title, author: { name, avatar } } = post;
-
-      renderPostHtml(media, avatar, title, body, created, name);
-    }
-
-    return json;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+export async function getPosts() {
+  const method = 'GET'
+  const json = await authWithToken(method, postsUrl);
+  renderPost(json);
 }
