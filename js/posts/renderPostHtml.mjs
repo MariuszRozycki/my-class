@@ -1,47 +1,60 @@
-import { fetchExternalImage } from "../utils/fetchExternalPic.mjs";
+import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 
-export async function renderPostHtml(media, avatar, title, body, created, name) {
+export function renderPostHtml(media, avatar, title, body, created, name) {
 
   const notExists = `Not exists`;
   const imgNotExists = '../../images/not-img.png';
   const avatarNotExists = '../../images/profile-default.png'
 
+  name = name || notExists;
   avatar = avatar || avatarNotExists;
-
-  if (media) {
-    if (!media.startsWith("http://imgur") && !media.startsWith("https://i.imgur")) {
-      media = await fetchExternalImage(media);
-      console.log(media);
-    }
-  }
   media = media || imgNotExists;
-
   title = title || notExists;
   body = body || notExists;
   created = created || notExists;
 
-  const dateInNorway = renderDateAndTime(created);
+  const capitalizeTitleAbbrev = abbreviateAndCapitalize(title);
+  const capitalizeBodyContAbbrev = abbreviateAndCapitalize(body);
+  const capitalizeNameContAbbrev = abbreviateAndCapitalize(name);
 
+  const dateInNorway = renderDateAndTime(created);
 
   const cardContainer = document.querySelector('.card-container');
 
-  cardContainer.innerHTML += `
-  <div class="p-3 col-12 col-sm-6 col-md-4 card rounded-0 text-light">
-    <div class="img-wrapper">
-      <img src="${media}" class="card-img-top rounded-2 p-1" alt=${title}>
-    </div>
-    <div class="card-body p-1 d-flex flex-column justify-content-between">
-      <h5 class="card-title">Title: ${title}</h5>
-      <p class="card-text">Content: ${body}</p>
-      <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
-      <div class="user-identification d-flex justify-content-start align-items-center">
-        <div class="avatar-img-wrapper">
-          <img class="rounded-circle border border-3 border-warning" src="${avatar}">
-        </div>
-        <p class="card-text p-2 text-wrap text-break text-start"><small>${name}</small></p>
-      </div>
-    </div>
+  const postWrapper = document.createElement('div');
+  postWrapper.className = 'p-3 col-12 col-sm-6 col-md-4 card rounded-0 text-light';
+
+  const imgWrapper = document.createElement('div');
+  imgWrapper.className = 'img-wrapper';
+
+  const img = document.createElement('img');
+  img.className = 'card-img-top rounded-2 p-1';
+  img.src = media;
+  img.alt = title;
+
+  const userIdentification = document.createElement('div');
+  userIdentification.className = 'user-identification d-flex justify-content-start align-items-center';
+  userIdentification.innerHTML = `
+  <div class="avatar-img-wrapper">
+    <img class="rounded-circle border border-3 border-warning" src="${avatar}">
   </div>
+  <p class="card-text p-2 text-wrap text-break text-start"><small>${capitalizeNameContAbbrev}</small></p>
   `;
+
+  const postBody = document.createElement('div');
+  postBody.className = 'card-body p-1 d-flex flex-column justify-content-between';
+  postBody.innerHTML = `
+  <h5 class="card-title">${capitalizeTitleAbbrev}</h5>
+  <p class="card-text">${capitalizeBodyContAbbrev}</p>
+  <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
+  `;
+
+  cardContainer.appendChild(postWrapper);
+  postWrapper.appendChild(userIdentification);
+  postWrapper.appendChild(imgWrapper);
+  postWrapper.appendChild(postBody);
+  imgWrapper.appendChild(img);
 }
+
+

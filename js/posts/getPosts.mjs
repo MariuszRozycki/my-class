@@ -18,7 +18,7 @@ export async function getPosts(url) {
     for (let post of json) {
       const { media, body, created, title, author: { name, avatar } } = post;
 
-      await renderPostHtml(media, avatar, title, body, created, name);
+      renderPostHtml(media, avatar, title, body, created, name);
     }
 
     return json;
