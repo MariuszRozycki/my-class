@@ -2,6 +2,7 @@ import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 
 export function renderPost(data) {
+  console.log(data);
   for (let post of data) {
     const { media, body, created, title, tags, author: { name, avatar } } = post;
     const tagsList = tags.join(', ');
