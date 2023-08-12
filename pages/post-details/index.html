@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Class || Create Post</title>
+  <title>My Class || Post details</title>
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
@@ -26,7 +26,10 @@
             <a class="nav-link" href="../feed">Feed</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../create-post/">Create new post</a>
+            <a class="nav-link" href="../create-post/">Create new post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../create-post/">Post details</a>
           </li>
           <li class="nav-item">
             <a class="nav-link log-out" href="/"><i class="fas fa-sign-out-alt"></i></a></i>
@@ -42,77 +45,56 @@
   <header>
     <div class="container-md bg-secondary">
       <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center text-light pt-5 pb-3">
-          <h1>Create New Post</h1>
+        <div class="col-12 d-flex justify-content-center align-items-center text-light py-5">
+          <h1>Post details</h1>
         </div>
       </div>
   </header>
-  <section class="create-new-post">
+
+  <section class="posts text-light">
+
+    <div id="all-posts-wrapper" class="container-md px-0 py-1">
+      <div class="card-group container-md">
+        <div class="row card-container"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="create-post">
+    <div class="container-md bg-secondary mt-3 p-2">
+      <div class="row mx-0">
+        <div class="col-12 text-center text-light px-0">
+          <h2>Create new post</h2>
+        </div>
+      </div>
+    </div>
     <div class="container-md bg-secondary py-3">
       <div class="row">
         <div class="col-12 col-sm-8 col-md-6 mx-auto">
-          <form id="new-post-form">
+          <form action="">
             <div class="form-floating mb-1">
               <input class="form-control" type="url" id="banner" placeholder="Paste url">
-              <label for="banner">Paste url to your banner</label>
+              <label for="banner">Paste Url</label>
             </div>
             <div class="form-floating mb-1">
-              <input class="form-control" placeholder="Add title" id="new-title">
+              <textarea class="form-control" placeholder="Add title" id="new-title"></textarea>
               <label for="new-title">Add title</label>
             </div>
             <div class="form-floating mb-1">
-              <input class="form-control" placeholder="Add post content" id="new-post-content"
-                style="height: 100px"></input>
+              <textarea class="form-control" placeholder="Add post content" id="new-post-content"
+                style="height: 100px"></textarea>
               <label for="new-post-content">Add text content</label>
             </div>
             <div class="form-floating">
               <input class="form-control" type="text" placeholder="Add tag" id="new-tag">
               <label for="new-tag">Add tag</label>
             </div>
-            <button id="add-new-post" class="btn btn-my mt-2" type="submit">Add post</button>
+            <button class="btn btn-my mt-2" type="submit">Add post</button>
           </form>
         </div>
       </div>
   </section>
-  <section class="posts text-light">
-    <div class="container-md bg-secondary mt-3 p-2">
-      <div class="row mx-0">
-        <div class="col-12 text-center text-light px-0">
-          <h2>Your currently created post</h2>
-        </div>
 
-        <div class="col-5 col-sm-4 col-lg-3 pb-3">
-          <select class="form-select form-select-sm" aria-label=".form-select-sm">
-            <option selected>Sort posts by:</option>
-            <option value="1">From last post</option>
-            <option value="2">From first post</option>
-            <option value="3">By author</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div id="all-posts-wrapper" class="container-md px-0 py-1">
-      <div class="card-group gap-1">
-        <div class="card mx-auto rounded-0 text-light">
-          <div class="img-wrapper">
-            <img src="../../images/dubrovnik_1000px_w.jpg" class="card-img-top rounded-2 p-1" alt="Dubrownik">
-          </div>
-          <div class="card-body d-flex flex-column justify-content-between">
-            <h5 class="card-title">How did I discovered
-              Croatia?</h5>
-            <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum
-              has been the...</p>
-            <p class="card-text p-2 mt-3 text-end"><small>Last updated 3 mins
-                ago</small>
-            <p class="card-text p-2 mt-3 text-start"><small>KK</small>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <footer class="mt-2">
     <div class="container-md bg-secondary text-light">
       <div class="row">
