@@ -18,7 +18,7 @@ export async function createNewPost() {
     const newBanner = document.querySelector('#banner').value;
 
     const json = newPostData(newTitle, newTextContent, newTag, newBanner);
-    console.log('json', json);
+
     authWithToken(method, postsUrl, json);
   });
 }

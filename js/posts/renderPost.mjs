@@ -2,8 +2,12 @@ import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 
 export function renderPost(data) {
+  if (!Array.isArray(data)) data = [data];
+
   for (let post of data) {
-    const { media, body, created, title, tags, author: { name, avatar } } = post;
+    const path = location.pathname;
+    console.log(path);
+    const { id, media, body, created, title, tags, author: { name, avatar } } = post;
     const tagsList = tags.join(', ');
 
     const notExists = `Not exists`;
@@ -27,6 +31,9 @@ export function renderPost(data) {
 
     const postWrapper = document.createElement('div');
     postWrapper.className = 'p-3 col-12 col-sm-6 col-md-4 mx-auto card rounded-0 text-light';
+
+    postWrapper.setAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
+
 
     const imgWrapper = document.createElement('div');
     imgWrapper.className = 'img-wrapper';
@@ -53,6 +60,21 @@ export function renderPost(data) {
     <p class="card-text">Tags: ${tagsList}</p>
     <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
     `;
+
+    if (path === `/pages/post-details/`) {
+      const cardGroup = document.querySelector('.card-group');
+      cardGroup.style = "display: block";
+      postWrapper.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
+      postWrapper.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
+      postWrapper.style = "max-width: 100%";
+      imgWrapper.style = "height: 275px";
+      postBody.innerHTML = `
+    <h5 class="card-title">${title.charAt(0).toUpperCase() + title.slice(1)}</h5>
+    <p class="card-text">${body.charAt(0).toUpperCase() + body.slice(1)}</p>
+    <p class="card-text">Tags: ${tagsList}</p>
+    <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
+    `;
+    }
 
     cardContainer.appendChild(postWrapper);
     postWrapper.appendChild(userIdentification);
