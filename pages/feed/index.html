@@ -57,7 +57,7 @@
     </div>
     <div class="container-md bg-secondary py-3">
       <div class="row">
-        <div class="col-12 d-sm-flex justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 mx-auto">
           <form action="">
             <div class="form-floating mb-1">
               <input class="form-control" type="url" id="banner" placeholder="Paste url">
@@ -89,19 +89,21 @@
         </div>
 
         <div class="col-5 col-sm-4 col-lg-3 pb-3">
-          <select class="form-select form-select-sm" aria-label=".form-select-sm">
-            <option selected>Sort posts by:</option>
-            <option value="1">From last post</option>
-            <option value="2">From first post</option>
+          <select id="filterOption" class="form-select form-select-sm" aria-label=".form-select-sm">
+            <option selected>View posts by:</option>
+            <option value="1">From newest post</option>
+            <option value="2">From oldest post</option>
             <option value="3">By author</option>
           </select>
+          <input type="text" id="authorInput" class="d-none form-control form-control-sm mt-2"
+            placeholder="Enter author name">
         </div>
       </div>
     </div>
 
     <div id="all-posts-wrapper" class="container-md px-0 py-1">
       <div class="card-group container-md">
-        <div class="row card-container clearfix"></div>
+        <div class="row card-container"></div>
       </div>
     </div>
   </section>

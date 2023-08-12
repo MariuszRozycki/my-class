@@ -2,8 +2,15 @@
   background-color: $secondary;
 }
 
-.card-img-top {
+.card {
+  max-width: 400px;
+  cursor: pointer;
+}
+
+.img-wrapper {
   height: 200px;
+  border: 2px solid;
+  border-color: $warning;
 }
 
 .user-identification {

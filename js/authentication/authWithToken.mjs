@@ -1,26 +1,27 @@
-import { postsUrl } from "../utils/api.mjs";
+/* import functions */
+import { createBodyJson } from "./createBodyJson.mjs";
 
-export async function getWithToken(url) {
-  console.log(url);
-
+export async function authWithToken(method, url, data) {
   try {
     const token = localStorage.getItem('ACCESS_TOKEN');
-    console.log(token);
+    let body = createBodyJson(method, data);
+
     const fetchOptions = {
-      method: "GET",
+      method: method,
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-    }
+      body
+    };
+
     const response = await fetch(url, fetchOptions);
     const json = await response.json();
 
-    console.log(json);
+    return json;
 
   } catch (error) {
     console.log(error);
     throw error;
   }
 }
-getWithToken(postsUrl);
