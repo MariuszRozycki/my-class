@@ -5,6 +5,7 @@ import { renderPost } from "./renderPost.mjs";
 export async function filterPosts() {
   const filterOption = document.getElementById('filterOption');
   const authorInput = document.getElementById('authorInput');
+  const cardContainer = document.querySelector('.card-container');
 
   filterOption.addEventListener('change', function () {
     handleFilterOptionChange();
@@ -17,10 +18,23 @@ export async function filterPosts() {
   function handleFilterOptionChange() {
     if (filterOption.value === "3") {
       authorInput.classList.remove("d-none");
-    } else {
+    }
+    else {
       authorInput.classList.add("d-none");
     }
+    if (filterOption.value === "2") {
+      const reversedPosts = [...json].reverse();
+
+      cardContainer.innerHTML = '';
+      renderPost(reversedPosts);
+    }
+    else if (filterOption.value === "1") {
+
+      cardContainer.innerHTML = '';
+      renderPost(json);
+    }
   }
+
 
   const method = "GET";
   const json = await authWithToken(method, postsUrl);
@@ -29,9 +43,8 @@ export async function filterPosts() {
     const inputValue = this.value.toLowerCase();
 
     const filteredPosts = json.filter(post => post.author.name.toLowerCase().includes(inputValue));
-    const cardContainer = document.querySelector('.card-container');
-    cardContainer.innerHTML = '';
 
+    cardContainer.innerHTML = '';
     renderPost(filteredPosts);
   });
 
