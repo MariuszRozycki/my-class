@@ -35,9 +35,9 @@ export async function filterPosts() {
     }
   }
 
-
   const method = "GET";
-  const json = await authWithToken(method, postsUrl);
+  const data = await authWithToken(method, postsUrl);
+  const json = data.json;
 
   authorInput.addEventListener('input', function () {
     const inputValue = this.value.toLowerCase();

@@ -4,9 +4,15 @@ import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 export function renderPost(data) {
   if (!Array.isArray(data)) data = [data];
 
+  console.log('data in renderPost:', data);
+  const path = location.pathname;
+
+  if (path === `/pages/create-post/`) {
+    data.sort((a, b) => new Date(b.created) - new Date(a.created));
+    data = data.slice(0, 1);
+  }
+
   for (let post of data) {
-    const path = location.pathname;
-    console.log(path);
     const { id, media, body, created, title, tags, author: { name, avatar } } = post;
     const tagsList = tags.join(', ');
 
@@ -27,8 +33,8 @@ export function renderPost(data) {
 
     const dateInNorway = renderDateAndTime(createdValue);
 
+    const cardGroup = document.querySelector('.card-group');
     const cardContainer = document.querySelector('.card-container');
-
     const postWrapper = document.createElement('div');
     postWrapper.className = 'p-3 col-12 col-sm-6 col-md-4 mx-auto card rounded-0 text-light';
 
@@ -61,8 +67,7 @@ export function renderPost(data) {
     <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
     `;
 
-    if (path === `/pages/post-details/`) {
-      const cardGroup = document.querySelector('.card-group');
+    if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
       cardGroup.style = "display: block";
       postWrapper.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
       postWrapper.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
