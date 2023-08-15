@@ -33,12 +33,13 @@ export function renderPost(data) {
 
     const dateInNorway = renderDateAndTime(createdValue);
 
-    const cardGroup = document.querySelector('.card-group');
+    // const cardGroup = document.querySelector('.card-group');
     const cardContainer = document.querySelector('.card-container');
-    const postWrapper = document.createElement('div');
-    postWrapper.className = 'p-3 col-12 col-sm-6 col-md-4 mx-auto card rounded-0 text-light';
+    const singlePost = document.createElement('div');
+    singlePost.className = 'card text-light';
+    // singlePost.className = 'p-3 col-12 col-sm-6 col-md-4 mx-auto card rounded-0 text-light'; // In case trouble use again
 
-    postWrapper.setAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
+    singlePost.setAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
 
 
     const imgWrapper = document.createElement('div');
@@ -67,11 +68,15 @@ export function renderPost(data) {
     <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
     `;
 
+    // const searchedPostsHeader = document.createElement('h3');
+    // searchedPostsHeader.innerText = 'Searched posts';
+
     if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
-      cardGroup.style = "display: block";
-      postWrapper.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
-      postWrapper.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
-      postWrapper.style = "max-width: 100%";
+      // cardElement.prepend(searchedPostsHeader);
+      cardContainer.style = 'grid-template-columns: minmax(auto, 500px);';
+      singlePost.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
+      singlePost.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
+      singlePost.style = "max-width: 100%";
       imgWrapper.style = "height: 275px";
       postBody.innerHTML = `
     <h5 class="card-title">${title.charAt(0).toUpperCase() + title.slice(1)}</h5>
@@ -81,10 +86,10 @@ export function renderPost(data) {
     `;
     }
 
-    cardContainer.appendChild(postWrapper);
-    postWrapper.appendChild(userIdentification);
-    postWrapper.appendChild(imgWrapper);
-    postWrapper.appendChild(postBody);
+    cardContainer.appendChild(singlePost);
+    singlePost.appendChild(userIdentification);
+    singlePost.appendChild(imgWrapper);
+    singlePost.appendChild(postBody);
     imgWrapper.appendChild(img);
   }
 }
