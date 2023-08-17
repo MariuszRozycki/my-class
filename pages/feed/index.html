@@ -58,7 +58,7 @@
     <div class="container-md bg-secondary py-3">
       <div class="row">
         <div class="col-12 col-sm-8 col-md-6 mx-auto">
-          <form action="">
+          <form id="new-post-form">
             <div class="form-floating mb-1">
               <input class="form-control" type="url" id="banner" placeholder="Paste url">
               <label for="banner">Paste Url</label>
@@ -85,7 +85,7 @@
     <div class="container-md bg-secondary mt-3 p-2">
       <div class="row mx-0">
         <div class="col-12 text-center text-light px-0">
-          <h2>Lasts posts</h2>
+          <h2 id="all-posts-header">All posts:</h2>
         </div>
 
         <div class="col-5 col-sm-4 col-lg-3 pb-3">
@@ -101,7 +101,7 @@
       </div>
     </div>
 
-    <div id="all-posts-wrapper" class="container-md px-0 py-1">
+    <div id="all-posts-wrapper" class="container-md py-1">
       <div class="card-group container-md">
         <div class="row card-container"></div>
       </div>

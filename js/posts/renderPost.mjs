@@ -1,10 +1,17 @@
 import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
+import { getLoggedUserName } from "./getLoggedUserName.mjs";
+import { removePost } from "./removePost.mjs";
 
-export function renderPost(data) {
+export async function renderPost(data) {
+  console.log(data);
   if (!Array.isArray(data)) data = [data];
 
-  console.log('data in renderPost:', data);
+  const loggedUser = getLoggedUserName();
+  console.log(loggedUser);
+
+  const cardContainer = document.querySelector('.card-container');
+
   const path = location.pathname;
 
   if (path === `/pages/create-post/`) {
@@ -14,6 +21,7 @@ export function renderPost(data) {
 
   for (let post of data) {
     const { id, media, body, created, title, tags, author: { name, avatar } } = post;
+
     const tagsList = tags.join(', ');
 
     const notExists = `Not exists`;
@@ -33,14 +41,30 @@ export function renderPost(data) {
 
     const dateInNorway = renderDateAndTime(createdValue);
 
-    // const cardGroup = document.querySelector('.card-group');
-    const cardContainer = document.querySelector('.card-container');
     const singlePost = document.createElement('div');
     singlePost.className = 'card text-light';
-    // singlePost.className = 'p-3 col-12 col-sm-6 col-md-4 mx-auto card rounded-0 text-light'; // In case trouble use again
 
-    singlePost.setAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
 
+    const removeButtonWrapper = document.createElement('div');
+    removeButtonWrapper.className = 'remove-post-button-wrapper';
+
+    const removeButton = document.createElement('button');
+    removeButton.className = 'remove-post-button';
+    removeButton.setAttribute('data-id', id);
+    removeButton.innerHTML = 'X';
+
+    singlePost.prepend(removeButtonWrapper);
+    removeButtonWrapper.append(removeButton);
+
+    singlePost.addEventListener('click', e => {
+      if (!e.target.closest('.remove-post-button-wrapper')) {
+        window.location.href = `../../pages/post-details/?id=${id}`;
+      }
+    });
+
+    if (loggedUser !== name) {
+      removeButton.style = 'display: none';
+    }
 
     const imgWrapper = document.createElement('div');
     imgWrapper.className = 'img-wrapper';
@@ -68,16 +92,11 @@ export function renderPost(data) {
     <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
     `;
 
-    // const searchedPostsHeader = document.createElement('h3');
-    // searchedPostsHeader.innerText = 'Searched posts';
-
     if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
-      // cardElement.prepend(searchedPostsHeader);
-      cardContainer.style = 'grid-template-columns: minmax(auto, 500px);';
+      cardContainer.style = 'grid-template-columns: minmax(auto, 100%);';
       singlePost.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
       singlePost.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
       singlePost.style = "max-width: 100%";
-      imgWrapper.style = "height: 275px";
       postBody.innerHTML = `
     <h5 class="card-title">${title.charAt(0).toUpperCase() + title.slice(1)}</h5>
     <p class="card-text">${body.charAt(0).toUpperCase() + body.slice(1)}</p>
@@ -91,5 +110,10 @@ export function renderPost(data) {
     singlePost.appendChild(imgWrapper);
     singlePost.appendChild(postBody);
     imgWrapper.appendChild(img);
+
+
   }
+
+  removePost(cardContainer, data);
+
 }

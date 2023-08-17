@@ -12,5 +12,4 @@ export async function getPosts() {
   const json = data.json;
 
   renderPost(json);
-
 }
