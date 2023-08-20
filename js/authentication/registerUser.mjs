@@ -74,7 +74,7 @@ export async function registerUser(url, userData) {
         }
       }
     }
-
+    console.log(json);
     return json;
 
   }

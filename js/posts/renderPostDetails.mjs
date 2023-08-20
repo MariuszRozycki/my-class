@@ -12,8 +12,8 @@ export async function renderPostDetails() {
 
 
   const method = 'GET';
-  const json = await authWithToken(method, postByIdUrl);
-  console.log('json in renderPostDetails():', json);
+  const data = await authWithToken(method, postByIdUrl);
+  const json = data.json;
 
   renderPost([json]);
 

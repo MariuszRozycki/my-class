@@ -18,10 +18,13 @@ export async function authWithToken(method, url, data) {
     const response = await fetch(url, fetchOptions);
     const json = await response.json();
 
-    return json;
+    return {
+      json: json,
+      status: response.json
+    };
 
   } catch (error) {
-    console.log(error);
     throw error;
+
   }
 }
