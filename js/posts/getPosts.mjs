@@ -8,7 +8,6 @@ import { postsUrl } from "../utils/api.mjs";
 export async function getPosts() {
   const method = 'GET'
   const data = await authWithToken(method, postsUrl);
-
   const json = data.json;
 
   renderPost(json);

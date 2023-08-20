@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Class || Post details</title>
+  <title>My Class || Update Post</title>
   <link rel="stylesheet" href="../../dist/css/index.css">
 </head>
 
@@ -29,10 +29,7 @@
             <a class="nav-link" href="../create-post/">Create new post</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="../create-post/">Post details</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../update/">Update post</a>
+            <a class="nav-link active" href="../update/">Update post</a>
           </li>
           <li class="nav-item">
             <a class="nav-link log-out" href="/"><i class="fas fa-sign-out-alt"></i></a></i>
@@ -48,19 +45,38 @@
   <header>
     <div class="container-md bg-secondary">
       <div class="row">
-        <div class="col-12 d-flex justify-content-center align-items-center text-light py-5">
-          <h1>Post details</h1>
+        <div class="col-12 d-flex justify-content-center align-items-center text-light pt-5 pb-3">
+          <h1>Update Your Post</h1>
         </div>
       </div>
   </header>
 
-  <section class="posts text-light">
-
-    <div id="all-posts-wrapper" class="container-md px-0 py-1">
-      <div class="card-group container-md">
-        <div class="row card-container"></div>
+  <section class="update-post">
+    <div class="container-md bg-secondary py-3">
+      <div class="row">
+        <div class="col-12 col-sm-8 col-md-6 mx-auto">
+          <form id="update-post-form">
+            <div class="form-floating mb-1">
+              <input class="form-control" type="url" id="update-post-banner" placeholder="Paste url">
+              <label for="banner">Update your banner url</label>
+            </div>
+            <div class="form-floating mb-1">
+              <input class="form-control" placeholder="Update title" id="update-post-title">
+              <label for="update-title">Update title</label>
+            </div>
+            <div class="form-floating mb-1">
+              <input class="form-control" placeholder="Update post content" id="update-post-content"
+                style="height: 100px"></input>
+              <label for="update-post-content">Update text content</label>
+            </div>
+            <div class="form-floating">
+              <input class="form-control" type="text" placeholder="Update tag" id="update-post-tag">
+              <label for="update-post-tag">Update tag</label>
+            </div>
+            <button id="update-post" class="btn btn-my mt-2" type="submit">Update post</button>
+          </form>
+        </div>
       </div>
-    </div>
   </section>
 
   <footer class="mt-2">
