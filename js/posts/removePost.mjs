@@ -4,7 +4,8 @@ import { renderPost } from "./renderPost.mjs";
 
 let isDeletingInProgress = false;
 
-export function removePost() {
+export function removePost(path, cardContainer) {
+  console.log('path:', path);
   const removePostButtons = document.querySelectorAll('.remove-post-button');
 
   removePostButtons.forEach(button => {
@@ -16,12 +17,18 @@ export function removePost() {
 
       await deletePost(button.getAttribute('data-id'));
       const posts = await fetchPosts();
-      renderPost(posts);
+
+      if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
+        cardContainer.innerHTML = `<p>Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
+      } else {
+        renderPost(posts);
+      }
 
       isDeletingInProgress = false;
     });
   });
 }
+
 
 async function deletePost(id) {
   const method = 'DELETE';
