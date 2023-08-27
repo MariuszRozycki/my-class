@@ -43,3 +43,70 @@ li {
   padding: 20px;
   text-align: center;
 }
+
+.post-comment-form {
+  width: 100%;
+}
+
+.post-comment-form textarea,
+.post-comment-form button {
+  display: block;
+  width: 100%;
+}
+
+.post-comment-form textarea {
+  margin: 10px 0;
+  border: 1px solid;
+  padding: 5px;
+  font-size: 20px;
+  height: 150px;
+}
+
+.post-comment-form button {
+  background-color: $warning;
+  text-transform: uppercase;
+  font-size: 20px;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.comment-element {
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 15px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 5px;
+    background: linear-gradient(to bottom, rgba(255, 191, 0, 1), rgb(255, 255, 255));
+    z-index: 1;
+  }
+
+  .comment-link {
+    transition: .2s;
+    color: $tertiary;
+    text-decoration: none;
+
+    .comment-owner {
+      text-decoration: underline;
+    }
+
+    p {
+      margin: 0 auto;
+    }
+
+    &:hover {
+      color: $warning;
+    }
+  }
+}
+
+@media (min-width: 360px) {
+  .post-comment-form button {
+    width: 200px;
+  }
+}

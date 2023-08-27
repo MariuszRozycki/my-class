@@ -2,6 +2,7 @@ import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 import { getLoggedUserName } from "./getLoggedUserName.mjs";
 import { removePost } from "./removePost.mjs";
+import { createPostComment } from "./createPostComment.mjs";
 
 function createElement(tag, className, innerHTML) {
   const element = document.createElement(tag);
@@ -37,26 +38,31 @@ function createUserIdentification(nameCapAbb, avatarValue) {
 }
 
 function createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway) {
+
   const postBody = createElement('div', 'card-body');
   postBody.innerHTML = `
       <h5 class="card-title">${titleCapAbb}</h5>
       <p class="card-text">${bodyCapAbb}</p>
       <p class="card-text">Tags: ${tagsList}</p>
       <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
-      <p class="cart-text comment-wrapper">This is a comment</p>
   `;
-  return postBody;
+  const commentsWrapper = createElement('ul', 'cart-text comments-wrapper');
+  const commentsHeader = createElement('li', 'cart-text');
+  commentsHeader.textContent = 'Comments:';
+  postBody.appendChild(commentsWrapper);
+  commentsWrapper.prepend(commentsHeader)
+
+  return { postBody, commentsWrapper };
 }
 
 function createCommentForm() {
-  const commentForm = createElement('form');
-  const commentFormInput = createElement('input');
-  commentFormInput.type = 'text';
-  commentFormInput.name = 'comment';
-  commentFormInput.placeholder = 'Type your comment';
+  const commentForm = createElement('form', 'post-comment-form');
+  const commentFormTextArea = createElement('textarea');
+  commentFormTextArea.name = 'comment';
+  commentFormTextArea.placeholder = 'Type your comment';
   const commentSubmitButton = createElement('button', null, 'Add comment');
   commentSubmitButton.type = 'submit';
-  commentForm.appendChild(commentFormInput);
+  commentForm.appendChild(commentFormTextArea);
   commentForm.appendChild(commentSubmitButton);
   return commentForm;
 }
@@ -78,7 +84,9 @@ export async function renderPost(data) {
   }
 
   for (let post of data) {
-    const { id, media, body, created, title, tags, author: { name, avatar } } = post;
+    const { id, media, body, created, title, tags, author: { name, avatar }, comments } = post;
+
+
     if (path === `/pages/post-details/` && String(id) !== postIdFromUrl) {
       continue;
     }
@@ -110,7 +118,7 @@ export async function renderPost(data) {
 
     const imgWrapper = createImgWrapper(mediaValue, titleCapAbb);
     const userIdentification = createUserIdentification(nameCapAbb, avatarValue);
-    const postBody = createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway);
+    const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway);
 
     postContentWrapper.addEventListener('click', () => {
       window.location.href = `../../pages/post-details/?id=${id}`;
@@ -135,20 +143,34 @@ export async function renderPost(data) {
     singlePost.appendChild(postContentWrapper);
     postContentWrapper.append(userIdentification, imgWrapper, postBody);
 
+
+    comments.forEach(comment => {
+      console.log(comment);
+      if (comment) {
+        const commentElement = createElement('li', 'card-text comment-element');
+        const commentLink = createElement('a', 'comment-link');
+        const commentOwner = createElement('p', 'comment-owner', `@${comment.owner}`);
+        const commentContent = createElement('p', 'comment-content', `${comment.body}`);
+
+        commentsWrapper.appendChild(commentElement);
+        commentElement.appendChild(commentLink);
+        commentLink.appendChild(commentOwner);
+        commentLink.appendChild(commentContent);
+      }
+    });
+
     if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
       cardContainer.style = 'grid-template-columns: minmax(auto, 100%);';
       singlePost.removeAttribute('onclick', `window.location.href='../../pages/post-details/?id=${id}'`);
       singlePost.className = 'p-3 col-12 col-sm-8 mx-auto card rounded-0 text-light';
       singlePost.style = "max-width: 100%";
-      postBody.innerHTML = `
-              <h5 class="card-title">${title.charAt(0).toUpperCase() + title.slice(1)}</h5>
-              <p class="card-text">${body.charAt(0).toUpperCase() + body.slice(1)}</p>
-              <p class="card-text">Tags: ${tagsList}</p>
-              <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
-              <p class="comment-wrapper>This is comment</p>
-          `;
-      const commentForm = createCommentForm();
-      singlePost.appendChild(commentForm);
+
+      if (path === `/pages/post-details/`) {
+        const commentForm = createCommentForm();
+        singlePost.appendChild(commentForm);
+        createPostComment();
+      }
+
     }
   }
 
