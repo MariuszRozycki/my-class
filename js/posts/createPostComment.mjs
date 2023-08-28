@@ -1,13 +1,11 @@
 import { baseApi } from "../utils/api.mjs";
-import { postsUrl } from "../utils/api.mjs";
 import { authWithToken } from "../authentication/authWithToken.mjs";
+import { renderPostDetails } from "../posts/renderPostDetails.mjs";
 
 export function createPostComment() {
   const queryString = document.location.search;
   const params = new URLSearchParams(queryString);
   const id = params.get("id");
-  const parsedId = parseFloat(id);
-
 
   const commentForm = document.querySelector('.post-comment-form');
   commentForm.addEventListener('submit', async e => {
@@ -23,6 +21,7 @@ export function createPostComment() {
       const method = 'POST';
       const json = await authWithToken(method, postCommentUrl, bodyData);
       console.log('json in createPostComment()', json);
+      renderPostDetails();
     }
     catch (error) {
       throw error;

@@ -1,71 +1,15 @@
+import { createElement } from "../utils/createElement.mjs";
+import { createButton } from "../utils/createButton.mjs";
+import { createImgWrapper } from "../utils/createImgWrapper.mjs";
 import { abbreviateAndCapitalize } from "../utils/abbreviateAndCapitalize.mjs";
 import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 import { getLoggedUserName } from "./getLoggedUserName.mjs";
 import { removePost } from "./removePost.mjs";
 import { createPostComment } from "./createPostComment.mjs";
-
-function createElement(tag, className, innerHTML) {
-  const element = document.createElement(tag);
-  if (className) element.className = className;
-  if (innerHTML) element.innerHTML = innerHTML;
-  return element;
-}
-
-function createButton(className, dataId, innerHTML) {
-  const button = createElement('button', className, innerHTML);
-  if (dataId) button.setAttribute('data-id', dataId);
-  return button;
-}
-
-function createImgWrapper(mediaValue, titleCapAbb) {
-  const imgWrapper = createElement('div', 'img-wrapper');
-  const img = createElement('img', 'card-img-top rounded-2');
-  img.src = mediaValue;
-  img.alt = `Here should be img of: ${titleCapAbb}`;
-  imgWrapper.appendChild(img);
-  return imgWrapper;
-}
-
-function createUserIdentification(nameCapAbb, avatarValue) {
-  const userIdentification = createElement('div', 'user-identification d-flex justify-content-start align-items-center');
-  userIdentification.innerHTML = `
-      <div class="avatar-img-wrapper">
-          <img class="rounded-circle border border-3 border-warning" src="${avatarValue}">
-      </div>
-      <p class="card-text p-2 text-wrap text-break text-start"><small>${nameCapAbb}</small></p>
-  `;
-  return userIdentification;
-}
-
-function createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway) {
-
-  const postBody = createElement('div', 'card-body');
-  postBody.innerHTML = `
-      <h5 class="card-title">${titleCapAbb}</h5>
-      <p class="card-text">${bodyCapAbb}</p>
-      <p class="card-text">Tags: ${tagsList}</p>
-      <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
-  `;
-  const commentsWrapper = createElement('ul', 'cart-text comments-wrapper');
-  const commentsHeader = createElement('li', 'cart-text');
-  commentsHeader.textContent = 'Comments:';
-  postBody.appendChild(commentsWrapper);
-  commentsWrapper.prepend(commentsHeader)
-
-  return { postBody, commentsWrapper };
-}
-
-function createCommentForm() {
-  const commentForm = createElement('form', 'post-comment-form');
-  const commentFormTextArea = createElement('textarea');
-  commentFormTextArea.name = 'comment';
-  commentFormTextArea.placeholder = 'Type your comment';
-  const commentSubmitButton = createElement('button', null, 'Add comment');
-  commentSubmitButton.type = 'submit';
-  commentForm.appendChild(commentFormTextArea);
-  commentForm.appendChild(commentSubmitButton);
-  return commentForm;
-}
+import { createPostBody } from "../utils/createPostBody.mjs";
+import { createUserIdentification } from "../utils/createUserIdentification.mjs";
+import { createCommentForm } from "../utils/createCommentForm.mjs";
+import { removeComment } from "./removeComment.mjs";
 
 export async function renderPost(data) {
   if (!Array.isArray(data)) data = [data];
@@ -85,7 +29,6 @@ export async function renderPost(data) {
 
   for (let post of data) {
     const { id, media, body, created, title, tags, author: { name, avatar }, comments } = post;
-
 
     if (path === `/pages/post-details/` && String(id) !== postIdFromUrl) {
       continue;
@@ -146,19 +89,26 @@ export async function renderPost(data) {
     let hasComments = false;
 
     comments.forEach(comment => {
-      console.log(comment);
+      const { id: commentId, body: commentBody, owner: ownerOfComment } = comment;
+      console.log(loggedUser, name);
       if (comment) {
+        // console.log(comment);
         hasComments = true;
 
         const commentElement = createElement('li', 'card-text comment-element');
+        commentElement.setAttribute('data-comment-id', commentId);
         const commentLink = createElement('a', 'comment-link');
-        const commentOwner = createElement('p', 'comment-owner', `@${comment.owner}`);
-        const commentContent = createElement('p', 'comment-content', `${comment.body}`);
+        const commentOwner = createElement('p', 'comment-owner', `@${ownerOfComment}`);
+        const commentContent = createElement('p', 'comment-content', `${commentBody}`);
+        const removeCommentButton = createButton('remove-comment-button', `${commentId}`, 'X');
 
         commentsWrapper.appendChild(commentElement);
         commentElement.appendChild(commentLink);
+        commentElement.appendChild(removeCommentButton);
         commentLink.appendChild(commentOwner);
         commentLink.appendChild(commentContent);
+
+        removeComment(loggedUser, name);
       }
     });
 

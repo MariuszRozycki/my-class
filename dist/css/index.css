@@ -11952,6 +11952,8 @@ li {
   margin-bottom: 15px;
   position: relative;
   padding-left: 15px;
+  display: flex;
+  justify-content: space-between;
 }
 .comment-element::before {
   content: "";
@@ -11976,6 +11978,31 @@ li {
 }
 .comment-element .comment-link:hover {
   color: #ffc107;
+}
+.comment-element .remove-comment-button {
+  transition: 0.2s;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  border: 2px solid;
+}
+.comment-element .remove-comment-button:hover {
+  background-color: #ffc107;
+}
+
+.display-error-body-settings {
+  justify-content: center;
+  align-items: center;
+}
+
+.display-error {
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  background-color: blue;
+  color: #ffc107;
+  display: block;
+  text-align: center;
 }
 
 @media (min-width: 360px) {
