@@ -11896,6 +11896,25 @@ li {
   list-style: none;
 }
 
+.counter {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 200px;
+  font-size: 18px;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  text-align: center;
+  z-index: 2;
+  border-radius: 5px;
+  border: 2px solid #ffc107;
+}
+
 .searched-header {
   width: 100%;
   margin: 20px auto 5px;

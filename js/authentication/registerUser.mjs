@@ -16,11 +16,15 @@
     registerUser(registerUrl, user);
  */
 
+import { counter } from "../utils/counter.mjs";
+
 export async function registerUser(url, userData) {
   console.log('url in registerUser:', url);
 
+  const registerForm = document.querySelector('#register-form');
   const userRegisterFailure = document.querySelector('#user-not-registered');
   const userRegisterSuccess = document.querySelector('#user-registered');
+
 
   try {
     const postData = {
@@ -35,9 +39,13 @@ export async function registerUser(url, userData) {
     const json = await response.json();
     console.log(json);// console.log --> remove before submitting
 
+
     if (response.ok) {
       userRegisterSuccess.classList.remove('d-none');
       userRegisterFailure.classList.add('d-none');
+      registerForm.classList.add('position-relative');
+      counter();
+
     }
 
     if (!response.ok) {
