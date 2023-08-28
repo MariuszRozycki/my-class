@@ -44,7 +44,10 @@ export async function registerUser(url, userData) {
       userRegisterSuccess.classList.remove('d-none');
       userRegisterFailure.classList.add('d-none');
       registerForm.classList.add('position-relative');
-      counter();
+      setTimeout(() => {
+        counter();
+      }, 1000);
+
 
     }
 
