@@ -143,10 +143,13 @@ export async function renderPost(data) {
     singlePost.appendChild(postContentWrapper);
     postContentWrapper.append(userIdentification, imgWrapper, postBody);
 
+    let hasComments = false;
 
     comments.forEach(comment => {
       console.log(comment);
       if (comment) {
+        hasComments = true;
+
         const commentElement = createElement('li', 'card-text comment-element');
         const commentLink = createElement('a', 'comment-link');
         const commentOwner = createElement('p', 'comment-owner', `@${comment.owner}`);
@@ -158,6 +161,11 @@ export async function renderPost(data) {
         commentLink.appendChild(commentContent);
       }
     });
+
+    if (!hasComments) {
+      const commentContent = createElement('p', 'comment-content', 'No comments added');
+      commentsWrapper.appendChild(commentContent);
+    }
 
     if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
       cardContainer.style = 'grid-template-columns: minmax(auto, 100%);';
