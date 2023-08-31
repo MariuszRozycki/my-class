@@ -1,6 +1,7 @@
 /* imported functions */
 import { createNewPost } from "./createNewPost.mjs";
 import { getPosts } from "./getPosts.mjs";
+import { filterPostsRequired } from "./filterPostsRequired.mjs";
 import { filterPosts } from "./filterPosts.mjs";
 import { renderPostDetails } from "./renderPostDetails.mjs";
 import { searchHandler } from "../utils/searchHandler.mjs";
@@ -14,7 +15,9 @@ console.log(path);
 
 if (path === `/pages/feed/`) {
   getPosts();
-  filterPosts();
+  searchHandler();
+  filterPostsRequired(postsUrl);
+  filterPosts(postsUrl);
   createNewPost();
 } else if (path === `/pages/create-post/`) {
   createNewPost();
@@ -24,4 +27,4 @@ if (path === `/pages/feed/`) {
   updatePost();
 }
 
-searchHandler(postsUrl);
+

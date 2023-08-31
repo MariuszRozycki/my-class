@@ -32,9 +32,9 @@
             <a class="nav-link log-out" href="/"><i class="fas fa-sign-out-alt"></i></a></i>
           </li>
         </ul>
-        <form class="d-flex">
+        <form id="search-form" class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+          <button id="btn-search" class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
       </div>
     </div>
@@ -88,7 +88,7 @@
           <h2 id="all-posts-header">All posts:</h2>
         </div>
 
-        <div class="col-5 col-sm-4 col-lg-3 pb-3">
+        <div class="col-12 col-sm-6 col-lg-4 pb-3">
           <select id="filterOption" class="form-select form-select-sm" aria-label=".form-select-sm">
             <option selected>View posts by:</option>
             <option value="1">From newest post</option>
@@ -97,6 +97,15 @@
           </select>
           <input type="text" id="authorInput" class="d-none form-control form-control-sm mt-2"
             placeholder="Enter author name">
+        </div>
+
+        <div class="col-12 col-sm-5 pb-3">
+          <input class="form-radio" type="radio" id="posts-with-comments" name="filter-posts-with-comments"
+            value="Posts with comments" />
+          <label for="posts-with-comments">Posts with comments</label><br>
+          <input class="form-radio" type="radio" id="all-posts-radio" name="filter-posts-with-comments"
+            value="All posts" checked />
+          <label for="all-posts-radio">All posts</label>
         </div>
       </div>
     </div>

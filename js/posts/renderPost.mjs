@@ -1,3 +1,24 @@
+/**
+ * Function to render posts on a webpage. This function can render multiple posts or a single post
+ * depending on the data received. It also has various checks to render the post differently based
+ * on the current URL path. 
+ * 
+ * @param {Array|Object} data - The post data to be rendered. Can either be an array of post objects or a single post object.
+ * Each post object should contain the properties: id, media, body, created, title, tags, author, and comments.
+ * 
+ * @example
+ * // Render multiple posts
+ * const postData = [
+ *  { id: 1, media: 'image.jpg', body: 'some text', created: 'some date', title: 'Title', tags: ['tag1'], author: { name: 'John', avatar: 'avatar.jpg' }, comments: [] },
+ *  { id: 2, media: 'image2.jpg', body: 'some text 2', created: 'some other date', title: 'Another Title', tags: ['tag2'], author: { name: 'Doe', avatar: 'avatar2.jpg' }, comments: [] }
+ * ];
+ * renderPost(postData);
+ * 
+ * // Render single post
+ * const singlePostData = { id: 1, media: 'image.jpg', body: 'some text', created: 'some date', title: 'Title', tags: ['tag1'], author: { name: 'John', avatar: 'avatar.jpg' }, comments: [] };
+ * renderPost(singlePostData);
+ */
+
 import { createElement } from "../utils/createElement.mjs";
 import { createButton } from "../utils/createButton.mjs";
 import { createImgWrapper } from "../utils/createImgWrapper.mjs";
@@ -12,14 +33,14 @@ import { createCommentForm } from "../utils/createCommentForm.mjs";
 import { removeComment } from "./removeComment.mjs";
 
 export async function renderPost(data) {
+
   if (!Array.isArray(data)) data = [data];
 
   const postIdFromUrl = new URLSearchParams(window.location.search).get('id');
-  console.log(postIdFromUrl);
 
   const loggedUser = getLoggedUserName();
   const cardContainer = document.querySelector('.card-container');
-  cardContainer.innerHTML = '';
+  // cardContainer.innerHTML = '';
   const path = location.pathname;
 
   if (path === `/pages/create-post/`) {
@@ -28,6 +49,7 @@ export async function renderPost(data) {
   }
 
   for (let post of data) {
+
     const { id, media, body, created, title, tags, author: { name, avatar }, comments } = post;
 
     if (path === `/pages/post-details/` && String(id) !== postIdFromUrl) {
@@ -53,6 +75,7 @@ export async function renderPost(data) {
     const singlePost = createElement('div', 'card text-light');
     const postContentWrapper = createElement('div', 'post-content-wrapper');
     const functionalButtonsWrapper = createElement('div', 'functional-post-buttons-wrapper');
+
     const removeButton = createButton('remove-post-button', id, 'X');
     const updateButton = createButton('update-post-button', id, 'Update post');
 
@@ -90,7 +113,6 @@ export async function renderPost(data) {
 
     comments.forEach(comment => {
       const { id: commentId, body: commentBody, owner: ownerOfComment } = comment;
-      console.log(loggedUser, name);
       if (comment) {
         // console.log(comment);
         hasComments = true;
@@ -126,7 +148,7 @@ export async function renderPost(data) {
       if (path === `/pages/post-details/`) {
         const commentForm = createCommentForm();
         singlePost.appendChild(commentForm);
-        createPostComment();
+        createPostComment(cardContainer);
       }
 
     }

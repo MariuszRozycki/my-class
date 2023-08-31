@@ -1,3 +1,17 @@
+/**
+ * Fetches the details of a post with the given ID and updates it when the form is submitted.
+ * The form for updating is populated with the current details of the post.
+ * 
+ * @async
+ * 
+ * @throws Will throw an error if the update operation fails.
+ * 
+ * @example
+ * // Call this function on a page where the query string includes a valid post ID, e.g. "?id=123".
+ * // This function will populate the update form and handle the update operation when the form is submitted.
+ * await updatePost();
+ */
+
 /* import functions */
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { postData } from "./postData.mjs";

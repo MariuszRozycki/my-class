@@ -17,6 +17,7 @@
  */
 
 import { counter } from "../utils/counter.mjs";
+import { displayError } from "../utils/displayError.mjs";
 
 export async function registerUser(url, userData) {
   console.log('url in registerUser:', url);
@@ -90,7 +91,7 @@ export async function registerUser(url, userData) {
 
   }
   catch (error) {
-    console.error(error);
+    displayError();
     throw error;
   }
 }

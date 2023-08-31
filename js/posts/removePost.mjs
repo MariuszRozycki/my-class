@@ -1,3 +1,18 @@
+/**
+ * Removes a post when the associated "remove post" button is clicked.
+ * This function is specifically designed for a DOM element container where each post is rendered with a "remove post" button.
+ * It uses asynchronous operations to delete the post and then re-fetch the remaining posts.
+ *
+ * @param {string} path - The current URL path. Used to conditionally change the behavior of the removal action.
+ * @param {HTMLElement} cardContainer - The DOM element that serves as the container for all posts.
+ *
+ * @example
+ * // Initialize removal functionality on a specified container
+ * const path = window.location.pathname;
+ * const cardContainer = document.querySelector('.card-container');
+ * removePost(path, cardContainer);
+ */
+
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { baseApi, postsUrl } from "../utils/api.mjs";
 import { renderPost } from "./renderPost.mjs";
