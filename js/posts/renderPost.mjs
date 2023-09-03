@@ -33,6 +33,7 @@ import { createCommentForm } from "../utils/createCommentForm.mjs";
 import { removeComment } from "./removeComment.mjs";
 
 export async function renderPost(data) {
+  console.log(data);
 
   if (!Array.isArray(data)) data = [data];
 

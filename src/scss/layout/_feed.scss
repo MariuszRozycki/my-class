@@ -9,15 +9,16 @@
 .card {
   width: 100%;
   margin: 10px 0;
-  display: grid;
-  grid-template-rows: 50px repeat(100%);
+  // display: grid;
   padding: 0;
+  border: 2px solid $warning;
 }
 
 .post-content-wrapper {
   cursor: pointer;
   background-color: $secondary;
   padding: 10px;
+  border-radius: var(--border-radius-bottom-small);
 }
 
 .img-wrapper {
@@ -60,9 +61,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5px 0;
+  margin: 0 0 5px;
   background-color: $secondary;
   padding: 10px 0;
+  border-radius: var(--border-radius-top-small);
 }
 
 .remove-post-button,

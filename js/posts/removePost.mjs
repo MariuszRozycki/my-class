@@ -16,10 +16,11 @@
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { baseApi, postsUrl } from "../utils/api.mjs";
 import { renderPost } from "./renderPost.mjs";
+import { displayUserPosts } from "../profile/getLoggedUserProfile.mjs";
 
 let isDeletingInProgress = false;
 
-export function removePost(path, cardContainer) {
+export function removePost(path, cardContainer, url, loggedUserName, method, imgNotExists, nameValue, avatarValue) {
   console.log('path:', path);
   const removePostButtons = document.querySelectorAll('.remove-post-button');
 
@@ -35,7 +36,11 @@ export function removePost(path, cardContainer) {
 
       if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
         cardContainer.innerHTML = `<p>Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
+      } else if (path === `/pages/profile/`) {
+        cardContainer.innerHTML = '';
+        await displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue);
       } else {
+        cardContainer.innerHTML = '';
         renderPost(posts);
       }
 
