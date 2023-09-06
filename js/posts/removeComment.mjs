@@ -1,15 +1,19 @@
 // import { authWithToken } from "../authentication/authWithToken.mjs";
 // import { baseApi } from "../utils/api.mjs";
+import { getLoggedUserName } from "./getLoggedUserName.mjs";
 
-export function removeComment(loggedUser, name) {
+export async function removeComment() {
   const removeCommentButtons = document.querySelectorAll('.remove-comment-button');
   const comments = document.querySelectorAll('.comment-element');
-
+  const loggedUser = getLoggedUserName();
   try {
+
     removeCommentButtons.forEach(button => {
-      if (loggedUser !== name) {
-        button.style = 'display: none';
+      const commentOwnerAtr = button.getAttribute('comment-owner');
+      if (commentOwnerAtr !== loggedUser) {
+        button.classList.add('hidden');
       }
+
       button.addEventListener('click', async (e) => {
         e.preventDefault();
         e.stopPropagation();

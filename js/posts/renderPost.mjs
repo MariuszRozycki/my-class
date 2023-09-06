@@ -130,13 +130,12 @@ export async function renderPost(data) {
       if (comment) {
         // console.log(comment);
         hasComments = true;
-
-        const commentElement = createElement('li', 'card-text comment-element');
+        const commentElement = createElement('li', 'card-text comment-element', '', `${ownerOfComment}`);
         commentElement.setAttribute('data-comment-id', commentId);
         const commentLink = createElement('a', 'comment-link');
         const commentOwner = createElement('p', 'comment-owner', `@${ownerOfComment}`);
         const commentContent = createElement('p', 'comment-content', `${commentBody}`);
-        const removeCommentButton = createButton('remove-comment-button', `${commentId}`, 'X');
+        const removeCommentButton = createButton('remove-comment-button', `${commentId}`, 'X', `${ownerOfComment}`);
 
         commentsWrapper.appendChild(commentElement);
         commentElement.appendChild(commentLink);
@@ -144,7 +143,7 @@ export async function renderPost(data) {
         commentLink.appendChild(commentOwner);
         commentLink.appendChild(commentContent);
 
-        removeComment(loggedUser, name);
+        removeComment();
       }
     });
 
@@ -164,7 +163,6 @@ export async function renderPost(data) {
         singlePost.appendChild(commentForm);
         createPostComment(cardContainer);
       }
-
     }
   }
 

@@ -12034,6 +12034,7 @@ li {
   margin-top: 5px;
 }
 
+.hidden,
 .second-nav-item:nth-child(1) {
   display: none;
 }
