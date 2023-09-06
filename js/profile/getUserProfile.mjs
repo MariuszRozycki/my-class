@@ -10,17 +10,27 @@ import { renderDateAndTime } from "../utils/renderDateAndTime.mjs";
 import { removeComment } from "../posts/removeComment.mjs";
 import { removePost } from "../posts/removePost.mjs";
 import { displayError } from "../utils/displayError.mjs";
+import { profilesUrl } from "../utils/api.mjs";
 
-export async function getLoggedUserProfile(url) {
+export async function getUserProfile(url, userName) {
+  console.log('userName inside getUserProfile:', userName);
+  console.log('url:', url);
+  const path = location.pathname;
   try {
-    const loggedUserName = getLoggedUserName();
+    let profileUserName = getLoggedUserName();
+    if (userName) {
+      profileUserName = userName;
+    }
+
     const method = 'GET';
-    const profileByNameUrl = `${url}/${loggedUserName}?_followers=true&_following=true&_posts=true`;
+    const profileByNameUrl = `${url}/profiles/${profileUserName}?_followers=true&_following=true&_posts=true`;
+    // const profileByNameUrl = `${url}/profiles/${profileUserName}/`;
+    console.log('profileByNameUrl:', profileByNameUrl);
 
     const data = await authWithToken(method, profileByNameUrl);
     const userData = data.json;
 
-    createProfileDataHtml(userData, url, loggedUserName, method);
+    createProfileDataHtml(userData, url, profileUserName, method, path);
 
   } catch (error) {
     displayError();
@@ -28,7 +38,7 @@ export async function getLoggedUserProfile(url) {
   }
 }
 
-function createProfileDataHtml(userData, url, loggedUserName, method) {
+function createProfileDataHtml(userData, url, profileUserName, method, path, userName) {
   const { avatar, banner, email, followers, following, name, id } = userData;
 
   const notExists = `Not exists`;
@@ -39,7 +49,7 @@ function createProfileDataHtml(userData, url, loggedUserName, method) {
   const avatarValue = avatar || avatarNotExists;
 
   displayUserData(nameValue, bannerValue, avatarValue, email);
-  displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue, notExists);
+  displayUserPosts(profilesUrl, profileUserName, method, imgNotExists, nameValue, avatarValue, notExists, path, userName);
 }
 
 function displayUserData(nameValue, bannerValue, avatarValue, email) {
@@ -64,11 +74,14 @@ function displayUserData(nameValue, bannerValue, avatarValue, email) {
   userDataContainer.appendChild(userProfileDataWrap);
 }
 
-export async function displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue, notExists) {
-  const postsByNameUrl = `${url}/${loggedUserName}/posts?_author=true&_reactions=true&_comments=true`;
+export async function displayUserPosts(url, profileUserName, method, imgNotExists, nameValue, avatarValue, notExists, path, userName) {
+  console.log('profilesUrl:', profilesUrl);
+  // console.log('profileUserName:', profileUserName);
+  const postsByNameUrl = `${url}/${profileUserName.toLowerCase()}/posts?_author=true&_reactions=true&_comments=true`;
+  // console.log('postsByNameUrl:', postsByNameUrl);
   const data = await authWithToken(method, postsByNameUrl);
   const posts = data.json;
-  const path = location.pathname;
+  // console.log(posts);
   const cardContainer = document.querySelector('.card-container');
 
   if (posts.length === 0) {
@@ -105,6 +118,21 @@ export async function displayUserPosts(url, loggedUserName, method, imgNotExists
     const imgWrapper = createImgWrapper(mediaValue, titleCapAbb);
     const userIdentification = createUserIdentification(nameCapAbb, avatarValue);
     const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway);
+
+    console.log('userName:', userName);
+    console.log('profileUserName:', profileUserName);
+    if (profileUserName && profileUserName === getLoggedUserName()) {
+      removeButton.style = 'display: block';
+      updateButton.style = 'display: block';
+    } else {
+      removeButton.style = 'display: none';
+      updateButton.style = 'display: none';
+    }
+
+    // if (userName !== profileUserName) {
+    //   removeButton.style = 'display: none';
+    //   updateButton.style = 'display: none';
+    // }
 
     postContentWrapper.addEventListener('click', () => {
       window.location.href = `../../pages/post-details/?id=${id}`;
@@ -150,5 +178,5 @@ export async function displayUserPosts(url, loggedUserName, method, imgNotExists
       commentsWrapper.appendChild(commentContent);
     }
   }
-  removePost(path, cardContainer, url, loggedUserName, method, imgNotExists, nameValue, avatarValue);
+  removePost(path, cardContainer, url, profileUserName, method, imgNotExists, nameValue, avatarValue);
 }

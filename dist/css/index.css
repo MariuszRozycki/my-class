@@ -12196,6 +12196,14 @@ li {
 .user-identification {
   height: 80px;
   width: 100%;
+  transition: 0.2s;
+}
+.user-identification .card-text {
+  flex-grow: 2;
+}
+.user-identification:hover {
+  color: #ffc107;
+  text-decoration: underline;
 }
 
 .card-body {

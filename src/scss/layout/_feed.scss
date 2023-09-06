@@ -30,6 +30,17 @@
 .user-identification {
   height: 80px;
   width: 100%;
+  transition: .2s;
+
+  .card-text {
+    flex-grow: 2;
+
+  }
+
+  &:hover {
+    color: $warning;
+    text-decoration: underline;
+  }
 }
 
 .card-body {

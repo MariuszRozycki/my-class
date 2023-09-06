@@ -31,6 +31,8 @@ import { createPostBody } from "../utils/createPostBody.mjs";
 import { createUserIdentification } from "../utils/createUserIdentification.mjs";
 import { createCommentForm } from "../utils/createCommentForm.mjs";
 import { removeComment } from "./removeComment.mjs";
+import { getProfileByName } from "../profile/getProfileByName.mjs";
+import { baseApi } from "../utils/api.mjs";
 
 export async function renderPost(data) {
   console.log(data);
@@ -96,6 +98,17 @@ export async function renderPost(data) {
         window.location.href = `../../pages/update/?id=${id}`;
       }
     });
+
+    userIdentification.addEventListener('click', e => { // working on
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.target.closest('.user-identification')) {
+        const userName = name;
+        console.log(userName);
+        window.location.href = `../../pages/profileByName/?userName=${userName}`;
+        // console.log('window.location.href:', window.location.href);
+      }
+    })
 
     if (loggedUser !== name) {
       removeButton.style = 'display: none';

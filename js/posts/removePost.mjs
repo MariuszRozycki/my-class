@@ -16,7 +16,7 @@
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { baseApi, postsUrl } from "../utils/api.mjs";
 import { renderPost } from "./renderPost.mjs";
-import { displayUserPosts } from "../profile/getLoggedUserProfile.mjs";
+import { displayUserPosts } from "../profile/getUserProfile.mjs";
 
 let isDeletingInProgress = false;
 

@@ -6,7 +6,7 @@ export function createUserIdentification(nameCapAbb, avatarValue) {
       <div class="avatar-img-wrapper">
           <img class="rounded-circle border border-3 border-warning" src="${avatarValue}">
       </div>
-      <p class="card-text p-2 text-wrap text-break text-start"><small>${nameCapAbb}</small></p>
+      <p class="card-text p-2 text-wrap text-break text-start"><small>@${nameCapAbb}</small></p>
   `;
   return userIdentification;
 }
