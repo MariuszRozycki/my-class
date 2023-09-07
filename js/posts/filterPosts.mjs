@@ -1,15 +1,3 @@
-/**
- * Filters posts based on user choice and shows them on the page.
- * 
- * @async
- * @param {string} url - The web address where we get the posts from.
- * @throws {Error} Shows an error if something goes wrong.
- * 
- * @example
- * const url = "https://example.com/api/posts";
- * filterPosts(url);
- */
-
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { renderPost } from "./renderPost.mjs";
 import { displayError } from "../utils/displayError.mjs";
@@ -31,10 +19,12 @@ export async function filterPosts(url) {
 
     function handleFilterOptionChange() {
       if (filterOption.value === '3') {
-        authorInput.classList.remove("d-none");
+        console.log(authorInput);
+        authorInput.classList.remove("hidden");
       }
       else {
-        authorInput.classList.add('d-none');
+        console.log("Setting authorInput to invisible");
+        authorInput.classList.add('hidden');
       }
       if (filterOption.value === '2') {
         const reversedPosts = [...json].reverse();
@@ -72,9 +62,9 @@ export async function filterPosts(url) {
       renderPost(filteredPosts);
     });
 
-    document.addEventListener('click', function (event) {
-      if (event.target !== authorInput && event.target !== filterOption) {
-        authorInput.classList.add('d-none');
+    document.addEventListener('click', function (e) {
+      if (e.target !== authorInput && e.target !== filterOption) {
+        authorInput.value = '';
       }
     });
   } catch (error) {

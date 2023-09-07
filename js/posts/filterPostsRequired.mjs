@@ -24,11 +24,12 @@ export async function filterPostsRequired(url) {
   const allPostsRatio = document.querySelector('#all-posts-radio');
   const allPostsHeader = document.getElementById('all-posts-header');
   const filterOption = document.getElementById('filterOption');
+  const authorInput = document.getElementById('authorInput');
   const method = 'GET';
 
   try {
     postsWithComments.addEventListener('click', function () {
-      renderPostsComments(method, url, cardContainer, allPostsHeader, filterOption);
+      renderPostsComments(method, url, cardContainer, allPostsHeader, filterOption, authorInput);
     });
     allPostsRatio.addEventListener('click', function () {
       renderPostsAll(method, url, cardContainer, allPostsHeader);
@@ -46,6 +47,7 @@ async function renderPostsComments(method, url, cardContainer, allPostsHeader) {
 
   allPostsHeader.innerText = 'Posts with comments:'
   filterOption.classList.add('d-none');
+  authorInput.classList.add('hidden');
   cardContainer.innerHTML = '';
   for (let post of json) {
     if (post.comments.length > 0) {
@@ -61,6 +63,7 @@ async function renderPostsAll(method, url, cardContainer, allPostsHeader) {
 
   allPostsHeader.innerText = 'All posts:'
   filterOption.classList.remove('d-none');
+  authorInput.classList.remove('hidden');
   cardContainer.innerHTML = '';
   for (let post of json) {
     renderPost(post);
