@@ -35,7 +35,7 @@ export function removePost(path, cardContainer, url, loggedUserName, method, img
       const posts = await fetchPosts();
 
       if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
-        cardContainer.innerHTML = `<p>Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
+        cardContainer.innerHTML = `<p class="bg-secondary mt-3 py-2 remove-message">Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
       } else if (path === `/pages/profile/`) {
         cardContainer.innerHTML = '';
         await displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue);

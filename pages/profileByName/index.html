@@ -11,7 +11,7 @@
 
 <body class="body-profile">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-sm ">
+    <div class="container-md">
       <a class="navbar-brand" href="/">MyClass</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
             <a class="nav-link log-out" href="/"><i class="fas fa-sign-out-alt"></i></a></i>
           </li>
         </ul>
-        <form class="d-flex">
+        <form class="d-none">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
@@ -43,7 +43,7 @@
     <div class="container-md bg-secondary">
       <div class="row">
         <div class="col-12 d-flex justify-content-center align-items-center text-light py-5">
-          <h1>Profile</h1>
+          <h1 class="profile-of-user">Profile of someone</h1>
         </div>
       </div>
     </div>
@@ -61,10 +61,7 @@
           <h2>Followers:</h2>
         </div>
         <div class="col-12 col-sm-12 text-light ">
-          <ul class="wrapper-follow-list d-flex flex-column justify-content-center align-items-center p-0">
-            <li class="follow-list-item"><a href="">Zuzanna Banaszak</a></li>
-            <li class="follow-list-item"><a href="">Igor Ksiazkiewicz</a></li>
-            <li class="follow-list-item"><a href=#>Stanislaw Bak</a></li>
+          <ul class="wrapper-followers-list d-flex flex-column justify-content-center align-items-center p-0">
           </ul>
         </div>
       </div>

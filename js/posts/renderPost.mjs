@@ -43,7 +43,7 @@ export async function renderPost(data) {
 
   const loggedUser = getLoggedUserName();
   const cardContainer = document.querySelector('.card-container');
-  // cardContainer.innerHTML = '';
+
   const path = location.pathname;
 
   if (path === `/pages/create-post/`) {
@@ -61,7 +61,7 @@ export async function renderPost(data) {
 
     const tagsList = tags.join(', ');
 
-    const notExists = `Not exists`;
+    const notExists = `Text doesn't exists`;
     const imgNotExists = '../../images/not-img.png';
     const avatarNotExists = '../../images/profile-default.png';
     const nameValue = name || notExists;
@@ -71,13 +71,15 @@ export async function renderPost(data) {
     const bodyValue = body || notExists;
     const createdValue = created || notExists;
     const titleCapAbb = abbreviateAndCapitalize(titleValue);
-    const bodyCapAbb = abbreviateAndCapitalize(bodyValue) + '...';
+    const bodyCapAbb = abbreviateAndCapitalize(bodyValue);
+    const bodyCapAbbThreeDots = abbreviateAndCapitalize(bodyValue) + '...';
     const nameCapAbb = abbreviateAndCapitalize(nameValue);
     const dateInNorway = renderDateAndTime(createdValue);
 
     const singlePost = createElement('div', 'card text-light');
     const postContentWrapper = createElement('div', 'post-content-wrapper');
     const functionalButtonsWrapper = createElement('div', 'functional-post-buttons-wrapper');
+    const followButton = createButton('my-btn follow-btn', id, 'Follow');
 
     const removeButton = createButton('remove-post-button', id, 'X');
     const updateButton = createButton('update-post-button', id, 'Update post');
@@ -85,9 +87,14 @@ export async function renderPost(data) {
     functionalButtonsWrapper.append(updateButton, removeButton);
     singlePost.prepend(functionalButtonsWrapper);
 
-    const imgWrapper = createImgWrapper(mediaValue, titleCapAbb);
+    const imgWrapper = createImgWrapper(mediaValue, title);
     const userIdentification = createUserIdentification(nameCapAbb, avatarValue);
-    const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway);
+
+
+    const bodyToUse = (path === `/pages/post-details/`) ? bodyCapAbb : bodyCapAbbThreeDots;
+
+
+    const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyToUse, tagsList, dateInNorway);
 
     postContentWrapper.addEventListener('click', () => {
       window.location.href = `../../pages/post-details/?id=${id}`;
@@ -99,20 +106,21 @@ export async function renderPost(data) {
       }
     });
 
-    userIdentification.addEventListener('click', e => { // working on
+    userIdentification.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
       if (e.target.closest('.user-identification')) {
         const userName = name;
         console.log(userName);
         window.location.href = `../../pages/profileByName/?userName=${userName}`;
-        // console.log('window.location.href:', window.location.href);
       }
     })
 
     if (loggedUser !== name) {
       removeButton.style = 'display: none';
       updateButton.style = 'display: none';
+      functionalButtonsWrapper.append(followButton);
+      functionalButtonsWrapper.style = 'justify-content: flex-end';
     }
 
     if (path !== `/pages/feed/` && loggedUser !== name) {

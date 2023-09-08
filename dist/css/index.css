@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* border-radius: 10px 10px 0 0 */
 :root {
   --border-radius-top-small: 4px 4px 0 0;
   --border-radius-bottom-small: 0 0 4px 4px;
@@ -11870,6 +11869,11 @@ textarea.form-control-lg {
 
 h1, .h1 {
   margin-bottom: 0;
+  text-align: center;
+}
+
+.container-md {
+  max-width: 720px;
 }
 
 .body-registration {
@@ -12000,6 +12004,10 @@ li {
   background-color: #ffc107;
 }
 
+.remove-message {
+  text-align: center;
+}
+
 .display-error-body-settings {
   justify-content: center;
   align-items: center;
@@ -12049,9 +12057,6 @@ li {
   }
 }
 @media (min-width: 420px) {
-  .container-second-nav {
-    flex-direction: row;
-  }
   .second-nav-item:nth-child(1),
   .second-nav-item:nth-child(2) {
     margin-top: 0;
@@ -12140,29 +12145,38 @@ li {
   font-size: 25px;
 }
 
-.no-posts {
+.profile-btn {
+  width: 170px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 10px;
+  border: 2px solid black;
+}
+
+.nothing-to-display {
   font-size: 22px;
-  color: rgb(66, 66, 66);
+  color: black;
   text-align: center;
   background-color: #ffc107;
   padding: 20px;
   border: 2px solid rgb(66, 66, 66);
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 10px;
 }
 
 .wrapper-posts-list li,
-.wrapper-follow-list li {
+.wrapper-followers-list li {
   color: rgb(255, 255, 255);
 }
 .wrapper-posts-list li a,
-.wrapper-follow-list li a {
+.wrapper-followers-list li a {
   text-decoration: none;
   color: rgb(255, 255, 255);
   transition: 0.2s;
 }
 .wrapper-posts-list li a:hover,
-.wrapper-follow-list li a:hover {
+.wrapper-followers-list li a:hover {
   color: rgb(255, 191, 0);
 }
 
@@ -12243,7 +12257,8 @@ li {
 }
 
 .remove-post-button,
-.update-post-button {
+.update-post-button,
+.follow-btn {
   margin: 5px;
   border: 1px solid;
   border-radius: 5px;
@@ -12255,7 +12270,8 @@ li {
   transition: 0.2s;
 }
 .remove-post-button:hover,
-.update-post-button:hover {
+.update-post-button:hover,
+.follow-btn:hover {
   background-color: rgb(255, 191, 0);
 }
 

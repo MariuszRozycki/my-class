@@ -11,7 +11,7 @@
 
 <body class="body-profile bg-primary">
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-sm ">
+    <div class="container-md ">
       <a class="navbar-brand" href="/">MyClass</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
             <a class="nav-link log-out" href="/"><i class="fas fa-sign-out-alt"></i></a></i>
           </li>
         </ul>
-        <form class="d-flex">
+        <form class="d-none">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
         </form>
@@ -44,8 +44,9 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-center align-items-center text-light pt-5 pb-3">
           <ul class="container-second-nav">
-            <li class="second-nav-item"><a class="text-light" href="../feed/">Feed</a></li>
-            <li class="second-nav-item text-light"><a class="text-light" href="../feed/"><i
+            <li class="second-nav-item"><a onclick="window.history.back(); return false;" class="text-light"
+                href="#">Prev</a></li>
+            <li class="second-nav-item"><a class="text-light" href="#" onclick="window.history.back(); return false;"><i
                   class="fas fa-arrow-left"></i></a></li>
             <li>
               <h1>Create New Post</h1>
