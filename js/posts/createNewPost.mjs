@@ -23,10 +23,13 @@ import { postsUrl } from "../utils/api.mjs";
 export async function createNewPost() {
   const method = 'POST';
   const newPostForm = document.querySelector('#new-post-form');
+  const sectionPosts = document.querySelector('.posts');
 
   if (!newPostForm.dataset.listenerAdded) {
     newPostForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      sectionPosts.classList.remove('hidden');
 
       const newTitle = document.querySelector('#new-title');
       const newTextContent = document.querySelector('#new-post-content');

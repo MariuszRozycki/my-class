@@ -12006,6 +12006,10 @@ li {
 
 .remove-message {
   text-align: center;
+  color: black;
+  background-color: #ffc107;
+  padding: 10px;
+  margin-bottom: 0;
 }
 
 .display-error-body-settings {
