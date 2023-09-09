@@ -6,3 +6,8 @@ $tertiary: rgb(255, 255, 255);
 $quaternary: rgb(75, 235, 75);
 $hover: rgb(255, 191, 0);
 $transition: .2s;
+
+:root {
+  --border-radius-top-small: 4px 4px 0 0;
+  --border-radius-bottom-small: 0 0 4px 4px;
+}

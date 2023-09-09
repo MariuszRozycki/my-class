@@ -1,6 +1,14 @@
 export function abbreviateAndCapitalize(text) {
+
+  const path = location.pathname;
+
   if (!text) return notExists;
-  const abbreviated = text.split(" ").slice(0, 5).join(" ");
+  let abbreviated;
+  if (path === `/pages/post-details/`) {
+    abbreviated = text;
+  } else {
+    abbreviated = text.split(" ").slice(0, 5).join(" ");
+  }
 
   return abbreviated.charAt(0).toUpperCase() + abbreviated.slice(1);
 }

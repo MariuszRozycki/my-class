@@ -1,8 +1,10 @@
 /* import functions */
 import { createBodyJson } from "./createBodyJson.mjs";
+import { displayError } from "../utils/displayError.mjs";
 
 export async function authWithToken(method, url, data) {
   try {
+
     const token = localStorage.getItem('ACCESS_TOKEN');
     let body = createBodyJson(method, data);
 
@@ -16,9 +18,9 @@ export async function authWithToken(method, url, data) {
     };
 
     const response = await fetch(url, fetchOptions);
-    console.log(response);
+    // console.log(response);
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
 
     return {
       json: json,
@@ -26,6 +28,7 @@ export async function authWithToken(method, url, data) {
     };
 
   } catch (error) {
+    displayError();
     throw error;
 
   }

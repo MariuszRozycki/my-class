@@ -9,15 +9,16 @@
 .card {
   width: 100%;
   margin: 10px 0;
-  display: grid;
-  grid-template-rows: 50px repeat(100%);
+  // display: grid;
   padding: 0;
+  border: 2px solid $warning;
 }
 
 .post-content-wrapper {
   cursor: pointer;
   background-color: $secondary;
   padding: 10px;
+  border-radius: var(--border-radius-bottom-small);
 }
 
 .img-wrapper {
@@ -29,6 +30,17 @@
 .user-identification {
   height: 80px;
   width: 100%;
+  transition: .2s;
+
+  .card-text {
+    flex-grow: 2;
+
+  }
+
+  &:hover {
+    color: $warning;
+    text-decoration: underline;
+  }
 }
 
 .card-body {
@@ -60,13 +72,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 5px 0;
+  margin: 0 0 5px;
   background-color: $secondary;
   padding: 10px 0;
+  border-radius: var(--border-radius-top-small);
 }
 
 .remove-post-button,
-.update-post-button {
+.update-post-button,
+.follow-btn {
   margin: 5px;
   border: 1px solid;
   border-radius: 5px;
@@ -99,22 +113,12 @@
 
 @media (min-width: 500px) {
   .card-container {
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
-    gap: 5px;
-
-    .card {
-      margin: 0;
-
-      .card-body {
-        height: 300px;
-      }
-    }
+    grid-template-columns: 60%;
   }
 }
 
 @media (min-width: 600px) {
   .card-container {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 50%;
   }
 }
