@@ -23,14 +23,6 @@ let isDeletingInProgress = false;
 
 export function removePost(path, cardContainer, url, loggedUserName, method, imgNotExists, nameValue, avatarValue) {
   let profileCardContainer;
-  console.log('path:', path);
-
-  console.log('url:', url);
-  console.log('loggedUserName:', loggedUserName);
-  console.log('method:', method);
-  console.log('imgNotExists:', imgNotExists);
-  console.log('nameValue:', nameValue);
-  console.log('avatarValue:', avatarValue);
 
   const removePostButtons = document.querySelectorAll('.remove-post-button');
 

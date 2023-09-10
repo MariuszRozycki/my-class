@@ -33,7 +33,7 @@ export async function getUserProfile(userName) {
     createProfileDataHtml(userData, baseApi, loggedUser, method, path);
 
   } catch (error) {
-    displayError(message, error);
+    displayError(error);
     throw error;
   }
 }
@@ -47,6 +47,8 @@ function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
     containerFollowersList.innerHTML = `<p class="nothing-to-display">You don't have any followers :(</p>`;
   } else {
     let listItems = '';
+    let sum = 0;
+    let sumOneMore = ++sum;
     for (let follower of followers) {
       const { avatar, name } = follower;
       listItems += `<li><a href="../../pages/profileByName/?userName=${name}">${sumOneMore}. ${name}</a></li>`;

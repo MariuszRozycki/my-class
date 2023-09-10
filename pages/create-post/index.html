@@ -63,19 +63,23 @@
             <div class="form-floating mb-1">
               <input class="form-control" type="url" id="banner" placeholder="Paste url">
               <label for="banner">Paste url to your banner</label>
+              <p class="hidden new-post-banner-error error"></p>
             </div>
             <div class="form-floating mb-1">
               <input class="form-control" placeholder="Add title" id="new-title">
               <label for="new-title">Add title</label>
+              <p class="hidden new-post-title-error error"></p>
             </div>
             <div class="form-floating mb-1">
               <input class="form-control" placeholder="Add post content" id="new-post-content"
                 style="height: 100px"></input>
               <label for="new-post-content">Add text content</label>
+              <p class="hidden new-post-content-error error"></p>
             </div>
             <div class="form-floating">
               <input class="form-control" type="text" placeholder="Add tag" id="new-tag">
               <label for="new-tag">Add tag</label>
+              <p class="hidden new-post-tag-error error"></p>
             </div>
             <button id="add-new-post" class="btn btn-my mt-2" type="submit">Add post</button>
           </form>

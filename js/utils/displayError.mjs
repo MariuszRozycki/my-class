@@ -1,7 +1,7 @@
 import { createElement } from "./createElement.mjs";
 
 export const displayError = (error, message = "Something is wrong!" + "<br>" + "Contact with tlf 939 28 270" + "<br>") => {
-  const errorMessage = `${message}${error ? ': ' + error.toString() : ''}`;
+  const errorMessage = `${error ? ': ' + error.toString() : ''} ${message}`;
   const existingError = document.querySelector('.display-error');
   if (existingError) {
     existingError.remove();

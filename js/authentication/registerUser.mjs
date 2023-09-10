@@ -91,7 +91,7 @@ export async function registerUser(url, userData) {
 
   }
   catch (error) {
-    displayError();
+    displayError(error);
     throw error;
   }
 }

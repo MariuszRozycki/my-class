@@ -5,8 +5,7 @@ import { updateProfile } from "./updateProfile.mjs";
 
 /* import url */
 import { profilesUrl } from "../utils/api.mjs";
-
-
+import { baseApi } from "../utils/api.mjs";
 
 const path = location.pathname;
 
@@ -14,7 +13,7 @@ if (path === '/pages/profile/') {
   getUserProfile();
 }
 if (path === '/pages/profileByName/') {
-  getProfileByName(baseApi, path);
+  getProfileByName(path);
 }
 if (path === '/pages/update-profile-media/') {
   updateProfile(profilesUrl);

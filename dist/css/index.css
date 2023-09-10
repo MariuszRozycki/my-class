@@ -12091,6 +12091,7 @@ li {
   border: 2px solid rgb(66, 66, 66);
 }
 
+.error,
 .name-error,
 .email-error,
 .password-error {
