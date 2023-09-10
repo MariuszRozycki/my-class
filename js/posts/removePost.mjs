@@ -17,48 +17,73 @@ import { authWithToken } from "../authentication/authWithToken.mjs";
 import { baseApi, postsUrl } from "../utils/api.mjs";
 import { renderPost } from "./renderPost.mjs";
 import { displayUserPosts } from "../profile/getUserProfile.mjs";
+import { displayError } from "../utils/displayError.mjs";
 
 let isDeletingInProgress = false;
 
 export function removePost(path, cardContainer, url, loggedUserName, method, imgNotExists, nameValue, avatarValue) {
-
+  let profileCardContainer;
   console.log('path:', path);
+
+  console.log('url:', url);
+  console.log('loggedUserName:', loggedUserName);
+  console.log('method:', method);
+  console.log('imgNotExists:', imgNotExists);
+  console.log('nameValue:', nameValue);
+  console.log('avatarValue:', avatarValue);
+
   const removePostButtons = document.querySelectorAll('.remove-post-button');
 
   removePostButtons.forEach(button => {
     button.addEventListener('click', async () => {
 
       if (isDeletingInProgress) return;
-
       isDeletingInProgress = true;
 
-      await deletePost(button.getAttribute('data-id'));
-      const posts = await fetchPosts();
-      if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
-        cardContainer.innerHTML = `<p class="remove-message">Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
-      } else if (path === `/pages/profile/`) {
-        cardContainer.innerHTML = '';
-        await displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue);
-      } else {
-        cardContainer.innerHTML = '';
-        renderPost(posts);
-      }
+      try {
+        await deletePost(button.getAttribute('data-id'));
+        button.closest('.post-card');
+        const posts = await fetchPosts();
 
-      isDeletingInProgress = false;
+        if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
+          cardContainer.innerHTML = `<p class="remove-message">Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
+        } else if (path === `/pages/profile/` || path === `/pages/profileByName/`) {
+          profileCardContainer = cardContainer;
+          profileCardContainer.innerHTML = '';
+          await displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue, '', path);
+        } else {
+          cardContainer.innerHTML = '';
+          await renderPost(posts);
+        }
+      } catch (error) {
+        displayError(error);
+        throw error;
+      } finally {
+        isDeletingInProgress = false;
+      }
     });
   });
 }
 
 
 async function deletePost(id) {
-  const method = 'DELETE';
-  const deleteUrl = `${baseApi}/posts/${id}`;
-  await authWithToken(method, deleteUrl);
+  try {
+    const method = 'DELETE';
+    const deleteUrl = `${baseApi}/posts/${id}`;
+    await authWithToken(method, deleteUrl);
+  } catch (error) {
+    displayError(error);
+    throw error;
+  }
 }
 
 async function fetchPosts() {
-  const method = 'GET';
-  const data = await authWithToken(method, postsUrl);
-
-  return data.json;
+  try {
+    const method = 'GET';
+    const data = await authWithToken(method, postsUrl);
+    return data.json;
+  } catch (error) {
+    console.error('An error occurred while fetching posts:', error);
+    throw error;
+  }
 }

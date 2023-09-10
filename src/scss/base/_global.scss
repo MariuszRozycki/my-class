@@ -155,19 +155,25 @@ li {
   margin-bottom: 0;
 }
 
-.display-error-body-settings {
-  justify-content: center;
-  align-items: center;
-}
+// .display-error-body-settings {
+//   justify-content: center;
+//   align-items: center;
+// }
 
 .display-error {
-  width: 100%;
-  height: 100px;
-  line-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  margin: 10px auto;
+  padding: 20px 10px;
+  min-height: 150px;
   background-color: blue;
   color: $warning;
-  display: block;
   text-align: center;
+  border: 2px solid $warning;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 .container-second-nav {

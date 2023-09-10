@@ -4,14 +4,14 @@ import { getProfileByName } from "./getProfileByName.mjs";
 import { updateProfile } from "./updateProfile.mjs";
 
 /* import url */
-import { baseApi, profilesUrl } from "../utils/api.mjs";
+import { profilesUrl } from "../utils/api.mjs";
 
 
 
 const path = location.pathname;
 
 if (path === '/pages/profile/') {
-  getUserProfile(baseApi);
+  getUserProfile();
 }
 if (path === '/pages/profileByName/') {
   getProfileByName(baseApi, path);

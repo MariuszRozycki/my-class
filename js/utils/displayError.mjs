@@ -1,9 +1,13 @@
 import { createElement } from "./createElement.mjs";
 
-export const displayError = (message = "Something is wrong! Contact with tlf 939 28 270", error) => {
-  const body = document.getElementsByTagName('body')[0];
+export const displayError = (error, message = "Something is wrong!" + "<br>" + "Contact with tlf 939 28 270" + "<br>") => {
+  const errorMessage = `${message}${error ? ': ' + error.toString() : ''}`;
+  const existingError = document.querySelector('.display-error');
+  if (existingError) {
+    existingError.remove();
+  }
 
-  const errorMessage = `${message} ${error ? error.toString() : ''}`;
-  const errorContainer = createElement('p', 'display-error', errorMessage);
-  body.appendChild(errorContainer);
+  const errorContainerWrapper = document.querySelector('.error-wrap');
+  const errorContainer = createElement('p', 'display-error mt-2', errorMessage);
+  errorContainerWrapper.appendChild(errorContainer);
 }

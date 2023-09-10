@@ -28,7 +28,7 @@ export async function authWithToken(method, url, data) {
     };
 
   } catch (error) {
-    displayError();
+    displayError(error);
     throw error;
 
   }

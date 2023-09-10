@@ -1,4 +1,5 @@
 export function abbreviateAndCapitalize(text) {
+  const notExists = 'Element not exists';
 
   const path = location.pathname;
 

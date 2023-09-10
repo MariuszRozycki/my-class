@@ -11,8 +11,9 @@ import { removeComment } from "../posts/removeComment.mjs";
 import { removePost } from "../posts/removePost.mjs";
 import { displayError } from "../utils/displayError.mjs";
 import { profilesUrl } from "../utils/api.mjs";
+import { baseApi } from "../utils/api.mjs";
 
-export async function getUserProfile(url, userName) {
+export async function getUserProfile(userName) {
   console.log('userName inside getUserProfile:', userName);
   const path = location.pathname;
   try {
@@ -22,22 +23,22 @@ export async function getUserProfile(url, userName) {
     }
 
     const method = 'GET';
-    const profileByNameUrl = `${url}/profiles/${loggedUser}?_followers=true&_following=true&_posts=true`;
+    const profileByNameUrl = `${baseApi}/profiles/${loggedUser}?_followers=true&_following=true&_posts=true`;
 
     console.log('profileByNameUrl:', profileByNameUrl);
 
     const data = await authWithToken(method, profileByNameUrl);
     const userData = data.json;
 
-    createProfileDataHtml(userData, url, loggedUser, method, path);
+    createProfileDataHtml(userData, baseApi, loggedUser, method, path);
 
   } catch (error) {
-    displayError();
+    displayError(message, error);
     throw error;
   }
 }
 
-function createProfileDataHtml(userData, url, loggedUser, method, path) {
+function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
 
   const { avatar, banner, email, followers, following, name, id } = userData;
 
@@ -45,12 +46,13 @@ function createProfileDataHtml(userData, url, loggedUser, method, path) {
   if (followers.length < 1) {
     containerFollowersList.innerHTML = `<p class="nothing-to-display">You don't have any followers :(</p>`;
   } else {
+    let listItems = '';
     for (let follower of followers) {
       const { avatar, name } = follower;
-      let sum = 0;
-      let sumOneMore = ++sum;
-      containerFollowersList.innerHTML = `<li><a href="../../pages/profileByName/?userName=${name}">${sumOneMore}. ${name}</a></li>`;
+      listItems += `<li><a href="../../pages/profileByName/?userName=${name}">${sumOneMore}. ${name}</a></li>`;
     }
+    containerFollowersList.innerHTML = listItems;
+
   }
   console.log('followers:', followers);
 
@@ -106,18 +108,25 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
 
 export async function displayUserPosts(url, loggedUser, method, imgNotExists, nameValue, avatarValue, notExists, path) {
   const postsByNameUrl = `${url}/${loggedUser}/posts?_author=true&_reactions=true&_comments=true`;
+  console.log('URL:', url);
+  console.log('postsByNameUrl:', postsByNameUrl);
   const data = await authWithToken(method, postsByNameUrl);
   console.log(data);
   const posts = data.json;
-  const cardContainer = document.querySelector('.card-container');
+  const profileCardContainer = document.querySelector('.card-container');
+  console.log(`profileCardContainer:`, profileCardContainer);
 
   console.log('GET: ', postsByNameUrl);
 
   if (posts.length === 0) {
     const noPostsMessage = createElement('p', 'nothing-to-display', `You don't have any posts.`);
     const createPostBtn = createButton('btn btn-my profile-btn mx-auto', '', 'Create Post');
-    cardContainer.append(createPostBtn);
-    cardContainer.prepend(noPostsMessage);
+    profileCardContainer.append(createPostBtn);
+    profileCardContainer.prepend(noPostsMessage);
+
+    createPostBtn.addEventListener('click', () => {
+      window.location.href = `../../pages/create-post`;
+    });
   }
 
   for (let post of posts) {
@@ -170,7 +179,7 @@ export async function displayUserPosts(url, loggedUser, method, imgNotExists, na
       }
     });
 
-    cardContainer.appendChild(singlePost);
+    profileCardContainer.appendChild(singlePost);
     singlePost.appendChild(postContentWrapper);
     postContentWrapper.append(userIdentification, imgWrapper, postBody);
 
@@ -203,5 +212,5 @@ export async function displayUserPosts(url, loggedUser, method, imgNotExists, na
       commentsWrapper.appendChild(commentContent);
     }
   }
-  removePost(path, cardContainer, url, loggedUser, method, imgNotExists, nameValue, avatarValue);
+  removePost(path, profileCardContainer, url, loggedUser, method, imgNotExists, nameValue, avatarValue);
 }
