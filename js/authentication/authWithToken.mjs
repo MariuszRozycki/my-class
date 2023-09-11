@@ -2,6 +2,29 @@
 import { createBodyJson } from "./createBodyJson.mjs";
 import { displayError } from "../utils/displayError.mjs";
 
+/**
+ * Authenticates a request with a token and performs an HTTP request.
+ * 
+ * @async
+ * @function authWithToken
+ * @param {string} method - The HTTP method ('GET', 'PUT', 'POST', 'DELETE').
+ * @param {string} url - The URL for the request, used to generate a token.
+ * @param {Object} [data] - Optional data to be sent in the request body.
+ * @returns {Promise<{json: Object, status: Object}>} - A Promise that resolves to an object containing the JSON response and status code.
+ * @throws Will throw an error if the fetch operation or any other operation fails.
+ * 
+ * @example  
+ * // Example usage:
+ * const method = 'GET';
+ * const url = 'https://api.example.com/blablabla';
+ * const data = { key: 'value' };
+ * const result = await authWithToken(method, url, data);
+ * const { json, status } = result;
+ */
+export async function authWithToken(method, url, data) {
+  // ... (your code here)
+}
+
 export async function authWithToken(method, url, data) {
   try {
 
@@ -27,9 +50,9 @@ export async function authWithToken(method, url, data) {
       status: response.json
     };
 
-  } catch (errors) {
-    displayError(errors.message);
-    throw errors;
+  } catch (error) {
+    displayError(error);
+    throw error;
 
   }
 }
