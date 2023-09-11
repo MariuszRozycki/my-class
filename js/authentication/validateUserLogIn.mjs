@@ -1,3 +1,19 @@
+/**
+ * Validates user login information based on email and password.
+ * Updates the UI to display error messages if the validation fails.
+ * 
+ * @function validateUserLogIn
+ * @param {string} email - The email address entered by the user.
+ * @param {string} password - The password entered by the user.
+ * @returns {Object} - An object containing the validated email and password. Empty strings if validation fails.
+ * 
+ * @example  
+ * // Example usage:
+ * const email = 'user@noroff.no';
+ * const password = 'password123';
+ * const validatedUser = validateUserLogIn(email, password);
+ */
+
 const isValidEmail = email => {
   return email && (email.endsWith('@noroff.no') || email.endsWith('@stud.noroff.no'));
 }
@@ -30,5 +46,4 @@ export function validateUserLogIn(email, password) {
   }
 
   return user;
-
 }
