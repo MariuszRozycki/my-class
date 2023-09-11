@@ -30,7 +30,7 @@ export async function getPosts() {
 
     renderPost(json);
   } catch (error) {
-    displayError();
+    displayError(error);
     throw error;
   }
 }

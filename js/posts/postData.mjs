@@ -14,7 +14,8 @@
  * const tags = "tag1, tag2, tag3";
  * const media = "https://example.com/image.jpg";
  * const myPost = postData(title, body, tags, media);
- * // myPost will be: { title: "My New Post", body: "This is the content of my new post.", tags: ["tag1", "tag2", "tag3"], media: "https://example.com/image.jpg" }
+ * // myPost will be: { title: "My New Post", body: "This is the content of my new post.",
+ * tags: ["tag1", "tag2", "tag3"], media: "https://example.com/image.jpg" }
  */
 
 export function postData(title, body, tags, media) {

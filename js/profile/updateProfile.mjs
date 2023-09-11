@@ -3,6 +3,21 @@ import { authWithToken } from "../authentication/authWithToken.mjs";
 import { createElement } from "../utils/createElement.mjs";
 import { displayError } from "../utils/displayError.mjs";
 
+
+/**
+ * Updates the user's profile media (banner and avatar) based on the form input.
+ * Fetches the current media data, pre-fills the form with it, and updates the media upon form submission.
+ * 
+ * @async
+ * @function updateProfile
+ * @param {string} url - The base URL for the profile API endpoint.
+ * @throws Will throw an error if any operation fails.
+ * 
+ * @example  
+ * // Example usage:
+ * const url = 'https://api.example.com/profiles';
+ * await updateProfile(url);
+ */
 export async function updateProfile(url) {
   const queryString = document.location.search;
   const params = new URLSearchParams(queryString);

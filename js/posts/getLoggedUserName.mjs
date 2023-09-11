@@ -8,7 +8,6 @@
  * 
  * @example
  * const userName = getLoggedUserName();
- * console.log(`Logged-in user's name is ${userName}`);
  */
 
 export function getLoggedUserName() {

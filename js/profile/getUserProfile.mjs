@@ -13,6 +13,19 @@ import { displayError } from "../utils/displayError.mjs";
 import { profilesUrl } from "../utils/api.mjs";
 import { baseApi } from "../utils/api.mjs";
 
+/**
+ * Fetches and displays the user profile based on the username.
+ * 
+ * @async
+ * @function getUserProfile
+ * @param {string} userName - The username of the user whose profile is to be fetched.
+ * @throws Will throw an error if any operation fails.
+ * 
+ * @example  
+ * await getUserProfile('pawel_stafanowski');
+ */
+
+
 export async function getUserProfile(userName) {
   console.log('userName inside getUserProfile:', userName);
   const path = location.pathname;
@@ -38,6 +51,18 @@ export async function getUserProfile(userName) {
   }
 }
 
+
+
+/**
+ * Creates and inserts HTML elements to display user profile data.
+ * 
+ * @function createProfileDataHtml
+ * @param {Object} userData - The user data object.
+ * @param {string} baseApi - The base API URL.
+ * @param {string} loggedUser - The username of the logged-in user.
+ * @param {string} method - The HTTP method used for API requests.
+ * @param {string} path - The current URL path.
+ */
 function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
 
   const { avatar, banner, email, followers, following, name, id } = userData;
@@ -70,6 +95,17 @@ function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
   displayUserPosts(profilesUrl, loggedUser, method, imgNotExists, nameValue, avatarValue, notExists, path);
 }
 
+
+/**
+ * Displays user data on the profile page.
+ * 
+ * @function displayUserData
+ * @param {string} nameValue - The name of the user.
+ * @param {string} bannerValue - The banner image URL.
+ * @param {string} avatarValue - The avatar image URL.
+ * @param {string} email - The email of the user.
+ * @param {string} loggedUser - The username of the logged-in user.
+ */
 function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser) {
   console.log('--> loggedUser displayUserData:', loggedUser);
   const loggedUserHeader = document.querySelector('.profile-of-user');
@@ -108,6 +144,23 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
   userDataContainer.appendChild(userProfileDataWrap);
 }
 
+
+
+/**
+ * Fetches and displays posts of a user.
+ * 
+ * @async
+ * @function displayUserPosts
+ * @param {string} url - The URL for fetching posts.
+ * @param {string} loggedUser - The username of the logged-in user.
+ * @param {string} method - The HTTP method used for API requests.
+ * @param {string} imgNotExists - The default image URL when no image exists.
+ * @param {string} nameValue - The name of the user.
+ * @param {string} avatarValue - The avatar image URL.
+ * @param {string} notExists - The default value when a field does not exist.
+ * @param {string} path - The current URL path.
+ * @throws Will throw an error if any operation fails.
+ */
 export async function displayUserPosts(url, loggedUser, method, imgNotExists, nameValue, avatarValue, notExists, path) {
   const postsByNameUrl = `${url}/${loggedUser}/posts?_author=true&_reactions=true&_comments=true`;
   const data = await authWithToken(method, postsByNameUrl);

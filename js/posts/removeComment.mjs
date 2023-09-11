@@ -1,6 +1,7 @@
 // import { authWithToken } from "../authentication/authWithToken.mjs";
 // import { baseApi } from "../utils/api.mjs";
 import { getLoggedUserName } from "./getLoggedUserName.mjs";
+import { displayError } from "../utils/displayError.mjs";
 
 export async function removeComment() {
   const removeCommentButtons = document.querySelectorAll('.remove-comment-button');
@@ -31,12 +32,13 @@ export async function removeComment() {
       });
     });
   } catch (error) {
+    displayError(error);
     throw error;
   }
 }
 
 // async function deleteComment(id) {
-  // const method = 'DELETE';
-  // const deleteUrl = `${baseApi}/posts/${id}/comment`; Can not find delete comment endpoint.
-  // await authWithToken(method, deleteUrl);
+// const method = 'DELETE';
+// const deleteUrl = `${baseApi}/posts/${id}/comment`; Can not find delete comment endpoint.
+// await authWithToken(method, deleteUrl);
 // }
