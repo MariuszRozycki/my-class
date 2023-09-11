@@ -37,21 +37,36 @@ export async function updateProfile(url) {
     e.preventDefault();
     const bannerInputValue = bannerInput.value;
     const avatarInputValue = avatarInput.value;
-    const method = 'PUT';
-    const json = mediaProfileData(bannerInputValue, avatarInputValue);
 
     try {
-      await authWithToken(method, updateProfileUrl, json);
+      const method = 'PUT';
+      const dataUrl = mediaProfileData(bannerInputValue, avatarInputValue);
 
-      const messageParagraph = createElement('p', 'nothing-to-display', 'Your profile media has been updated');
-      profileMediaContainer.innerHTML = '';
-      profileMediaContainer.prepend(messageParagraph);
-      backToProfileBtn.classList.remove('hidden');
-      backToProfileBtn.addEventListener('click', () => { window.location.href = `../../pages/profile/?userName=${userName}` });
+      const json = await authWithToken(method, updateProfileUrl, dataUrl);
+      console.log(json);
 
+      const jsonBadRequest = json.json.status
+
+      if (jsonBadRequest) {
+        const jsonErrors = json.json.errors;
+
+        for (let error of jsonErrors) {
+          let errorMessage = error.message;
+
+          const errorParagraph = createElement('p', 'error', `${errorMessage}`);
+          profileMediaContainer.innerHTML = '';
+          profileMediaContainer.prepend(errorParagraph);
+        }
+      } else {
+        const messageParagraph = createElement('p', 'nothing-to-display', 'Your profile media has been updated');
+        profileMediaContainer.innerHTML = '';
+        profileMediaContainer.prepend(messageParagraph);
+        backToProfileBtn.classList.remove('hidden');
+        backToProfileBtn.addEventListener('click', () => { window.location.href = `../../pages/profile/?userName=${userName}` });
+      }
     }
     catch (error) {
-      displayError();
+      displayError(error);
       throw error;
     }
   });
