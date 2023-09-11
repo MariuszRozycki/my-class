@@ -14,7 +14,6 @@
  * const emailValue = document.querySelector('#email').value;
  * const passwordValue = document.querySelector('#password').value;
  * const user = validateUser(userName, email, password);
- * console.log(user);
  */
 
 const isValidName = userName => {

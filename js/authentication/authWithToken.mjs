@@ -5,7 +5,6 @@ import { displayError } from "../utils/displayError.mjs";
 /**
  * Authenticates a request with a token and performs an HTTP request.
  * 
- * @async
  * @function authWithToken
  * @param {string} method - The HTTP method ('GET', 'PUT', 'POST', 'DELETE').
  * @param {string} url - The URL for the request, used to generate a token.
@@ -21,9 +20,6 @@ import { displayError } from "../utils/displayError.mjs";
  * const result = await authWithToken(method, url, data);
  * const { json, status } = result;
  */
-export async function authWithToken(method, url, data) {
-  // ... (your code here)
-}
 
 export async function authWithToken(method, url, data) {
   try {
