@@ -12,11 +12,9 @@ const path = location.pathname;
 
 if (path === '/pages/profile/') {
   getUserProfile();
-  searchHandler();
 }
 if (path === '/pages/profileByName/') {
   getProfileByName(path);
-  searchHandler();
 }
 if (path === '/pages/update-profile-media/') {
   updateProfile(profilesUrl);

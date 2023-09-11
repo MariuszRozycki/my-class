@@ -4,12 +4,10 @@ import { baseApi } from "./api.mjs";
 import { postsUrl } from "./api.mjs";
 
 export function searchHandler() {
-
   const searchForm = document.querySelector('#search-form');
   const searchInput = document.querySelector('input[type="search"]');
 
   searchInput.addEventListener('input', async function (e, inputValue = this.value.toLowerCase()) {
-    e.preventDefault();
     search(e, inputValue, postsUrl);
   });
 
@@ -19,14 +17,11 @@ export function searchHandler() {
   });
 }
 
-async function search(e, inputValue, url) {
-
+async function search(e, inputValue, url, postsUrl) {
   const filterOption = document.querySelector('#filterOption');
   const allPostsHeader = document.getElementById('all-posts-header');
   const cardContainer = document.querySelector('.card-container');
   const createPost = document.querySelector('.create-post');
-
-  const path = location.pathname;
 
   try {
     e.preventDefault();
@@ -36,22 +31,17 @@ async function search(e, inputValue, url) {
       return;
     }
 
-    if (inputValue !== '' && path === `/pages/feed/`) {
+    if (inputValue !== '') {
       createPost.classList.add('d-none');
+      url = `${baseApi}/posts?_tag=${inputValue}&_author=true&_comments=true`;
     }
-    url = `${baseApi}/posts?_tag=${inputValue.toLowerCase()}&_author=true&_comments=true`;
-    console.log(url);
-
     const filterTagEndpoint = await authWithToken(method, url);
-    console.log(filterTagEndpoint);
     const json = filterTagEndpoint.json;
 
-    cardContainer.innerHTML = '';
-    if (path === `/pages/feed/`) {
-      allPostsHeader.innerText = 'Searched content:';
-      filterOption.style = 'display: none';
-    }
 
+    cardContainer.innerHTML = '';
+    allPostsHeader.innerText = 'Searched content:';
+    filterOption.style = 'display: none';
 
     json.map(async (data) => {
       renderPost(data);
@@ -61,7 +51,7 @@ async function search(e, inputValue, url) {
       createPost.classList.remove('d-none');
       const allPost = await authWithToken(method, url);
       const jsonAll = allPost.json;
-
+      console.log(postsUrl);
       renderPost(jsonAll);
 
       allPostsHeader.innerText = 'All posts:';

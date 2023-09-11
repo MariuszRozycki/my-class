@@ -110,15 +110,9 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
 
 export async function displayUserPosts(url, loggedUser, method, imgNotExists, nameValue, avatarValue, notExists, path) {
   const postsByNameUrl = `${url}/${loggedUser}/posts?_author=true&_reactions=true&_comments=true`;
-  console.log('URL:', url);
-  console.log('postsByNameUrl:', postsByNameUrl);
   const data = await authWithToken(method, postsByNameUrl);
-  console.log(data);
   const posts = data.json;
   const profileCardContainer = document.querySelector('.card-container');
-  console.log(`profileCardContainer:`, profileCardContainer);
-
-  console.log('GET: ', postsByNameUrl);
 
   if (posts.length === 0) {
     const noPostsMessage = createElement('p', 'nothing-to-display', `You don't have any posts.`);
