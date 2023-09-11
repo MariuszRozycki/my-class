@@ -3,6 +3,17 @@ import { renderPost } from "../posts/renderPost.mjs";
 import { baseApi } from "./api.mjs";
 import { postsUrl } from "./api.mjs";
 
+/**
+ * Initializes search functionality by attaching event listeners to the search form and input elements.
+ * Listens for two types of events: 'input' and 'submit'.
+ * 
+ * @function
+ * @export
+ * 
+ * @example
+ * // Example usage:
+ * searchHandler();
+ */
 export function searchHandler() {
   const searchForm = document.querySelector('#search-form');
   const searchInput = document.querySelector('input[type="search"]');
@@ -17,7 +28,27 @@ export function searchHandler() {
   });
 }
 
-async function search(e, inputValue, url, postsUrl) {
+
+
+/**
+ * Performs a search operation based on the given input value.
+ * Fetches posts from a specified URL and updates the UI accordingly.
+ * 
+ * @async
+ * @function
+ * @param {Event} e - The event object, usually from an input or submit event.
+ * @param {string} inputValue - The value entered in the search input.
+ * @param {string} url - The base URL to fetch posts by tag.
+ * @throws Will throw an error if the fetch operation or any other operation fails.
+ * 
+ * @example
+ * // Example usage:
+ * const event = new Event('input');
+ * const inputValue = 'javascript';
+ * url = `${baseApi}/posts?_tag=${inputValue}&_author=true&_comments=true`;
+ * search(event, inputValue, url);
+ */
+async function search(e, inputValue, url) {
   const filterOption = document.querySelector('#filterOption');
   const allPostsHeader = document.getElementById('all-posts-header');
   const cardContainer = document.querySelector('.card-container');
@@ -37,7 +68,7 @@ async function search(e, inputValue, url, postsUrl) {
     }
     const filterTagEndpoint = await authWithToken(method, url);
     const json = filterTagEndpoint.json;
-
+    console.log(url);
 
     cardContainer.innerHTML = '';
     allPostsHeader.innerText = 'Searched content:';
