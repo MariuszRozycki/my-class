@@ -3,25 +3,30 @@ import { renderPost } from "../posts/renderPost.mjs";
 import { baseApi } from "./api.mjs";
 import { postsUrl } from "./api.mjs";
 
-export function searchHandler(url = postsUrl) {
+export function searchHandler() {
+
   const searchForm = document.querySelector('#search-form');
   const searchInput = document.querySelector('input[type="search"]');
 
   searchInput.addEventListener('input', async function (e, inputValue = this.value.toLowerCase()) {
-    search(e, inputValue, url);
+    e.preventDefault();
+    search(e, inputValue, postsUrl);
   });
 
   searchForm.addEventListener('submit', async function (e, inputValue = searchInput.value.toLowerCase()) {
     e.preventDefault();
-    search(e, inputValue, url);
+    search(e, inputValue, postsUrl);
   });
 }
 
-async function search(e, inputValue, url, postsUrl) {
+async function search(e, inputValue, url) {
+
   const filterOption = document.querySelector('#filterOption');
   const allPostsHeader = document.getElementById('all-posts-header');
   const cardContainer = document.querySelector('.card-container');
   const createPost = document.querySelector('.create-post');
+
+  const path = location.pathname;
 
   try {
     e.preventDefault();
@@ -31,17 +36,22 @@ async function search(e, inputValue, url, postsUrl) {
       return;
     }
 
-    if (inputValue !== '') {
+    if (inputValue !== '' && path === `/pages/feed/`) {
       createPost.classList.add('d-none');
-      url = `${baseApi}/posts?_tag=${inputValue}&_author=true&_comments=true`;
     }
+    url = `${baseApi}/posts?_tag=${inputValue.toLowerCase()}&_author=true&_comments=true`;
+    console.log(url);
+
     const filterTagEndpoint = await authWithToken(method, url);
+    console.log(filterTagEndpoint);
     const json = filterTagEndpoint.json;
 
-
     cardContainer.innerHTML = '';
-    allPostsHeader.innerText = 'Searched content:';
-    filterOption.style = 'display: none';
+    if (path === `/pages/feed/`) {
+      allPostsHeader.innerText = 'Searched content:';
+      filterOption.style = 'display: none';
+    }
+
 
     json.map(async (data) => {
       renderPost(data);
@@ -51,7 +61,7 @@ async function search(e, inputValue, url, postsUrl) {
       createPost.classList.remove('d-none');
       const allPost = await authWithToken(method, url);
       const jsonAll = allPost.json;
-      console.log(postsUrl);
+
       renderPost(jsonAll);
 
       allPostsHeader.innerText = 'All posts:';

@@ -37,7 +37,7 @@ export async function updatePost() {
   document.querySelector('#update-post-title').value = currentPostData.title || '';
   document.querySelector('#update-post-content').value = currentPostData.body || '';
   document.querySelector('#update-post-tag').value = currentPostData.tags
-    ? currentPostData.tags.map(tag => tag.replace(/^#/, '')).join(', ') : '';
+    ? currentPostData.tags.map(tag => tag.replace(/^#/, '').toLowerCase()).join(', ') : '';
 
   if (!updatePostForm.dataset.listenerAdded) {
     updatePostForm.addEventListener('submit', async (e) => {

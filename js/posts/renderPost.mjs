@@ -35,7 +35,7 @@ import { getProfileByName } from "../profile/getProfileByName.mjs";
 import { baseApi } from "../utils/api.mjs";
 
 export async function renderPost(data) {
-  console.log(data);
+  // console.log(data);
 
   if (!Array.isArray(data)) data = [data];
 

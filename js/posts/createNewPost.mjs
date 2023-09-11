@@ -44,7 +44,7 @@ export async function createNewPost() {
 
       const newTitleValue = newTitle.value;
       const newTextContentValue = newTextContent.value;
-      const newTagValue = newTag.value;
+      const newTagValue = newTag.value.toLowerCase();
       const newBannerValue = newBanner.value;
 
       const dataValue = postData(newTitleValue, newTextContentValue, newTagValue, newBannerValue);
@@ -62,11 +62,9 @@ export async function createNewPost() {
 
         if (jsonBadRequest) {
           const jsonErrors = json.json.errors;
-          //   console.log(jsonErrors);
 
           for (let error of jsonErrors) {
             const errorMessage = error.message;
-            console.log(errorMessage);
 
             switch (true) {
               case errorMessage.includes('Image'):
