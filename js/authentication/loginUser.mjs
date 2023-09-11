@@ -1,3 +1,22 @@
+/**
+ * Logs in a user by sending a POST request to the given URL with the provided user data.
+ * Stores the access token and user profile data in local storage.
+ * Redirects to the feed page if login is successful, otherwise displays error messages.
+ * 
+ * @async
+ * @function loginUser
+ * @param {string} url - The URL for the login API endpoint.
+ * @param {Object} userData - The user data containing email and password.
+ * @returns {Promise<Object>} - A Promise that resolves to an object containing the JSON response from the API.
+ * @throws Will throw an error if the fetch operation or any other operation fails.
+ * 
+ * @example  
+ * // Example usage:
+ * const url = 'https://api.example.com/login';
+ * const userData = { email: 'user@example.com', password: 'password123' };
+ * const result = await loginUser(url, userData);
+ */
+
 export async function loginUser(url, userData) {
   try {
     const postData = {
