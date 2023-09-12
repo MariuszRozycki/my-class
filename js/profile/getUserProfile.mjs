@@ -73,7 +73,7 @@ function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
     let sumOneMore = ++sum;
     for (let follower of followers) {
       const { avatar, name } = follower;
-      listItems += `<li><a href="../../pages/profileByName/?userName=${name}">${sumOneMore}. ${name}</a></li>`;
+      listItems += `<li><a href="../../pages/profile-by-name/?userName=${name}">${sumOneMore}. ${name}</a></li>`;
     }
     containerFollowersList.innerHTML = listItems;
 
