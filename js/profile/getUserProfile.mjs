@@ -122,7 +122,7 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
 
   const nameCapAbb = abbreviateAndCapitalize(nameValue);
   loggedUserHeader.innerHTML = 'Profile of: ' + '<br>' + nameCapAbb;
-
+  console.log(nameCapAbb);
   if (loggedUser && loggedUser === getLoggedUserName()) {
     loggedUserHeader.innerText = `My Profile`;
     userProfileDataWrap.appendChild(updateProfileBtn);
