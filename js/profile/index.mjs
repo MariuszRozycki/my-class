@@ -13,7 +13,7 @@ const path = location.pathname;
 if (path === '/pages/profile/') {
   getUserProfile();
 }
-if (path === '/pages/profileByName/') {
+if (path === '/pages/profile-by-name/') {
   getProfileByName(path);
 }
 if (path === '/pages/update-profile-media/') {

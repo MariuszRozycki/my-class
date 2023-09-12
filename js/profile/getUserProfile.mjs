@@ -168,7 +168,7 @@ export async function displayUserPosts(url, loggedUser, method, imgNotExists, na
     profileCardContainer.prepend(noPostsMessage);
 
     createPostBtn.addEventListener('click', () => {
-      window.location.href = `../../pages/create-post`;
+      window.location.href = `../../pages/create-post/`;
     });
   }
 

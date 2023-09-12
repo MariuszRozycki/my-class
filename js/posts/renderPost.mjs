@@ -110,7 +110,7 @@ export async function renderPost(data) {
       e.stopPropagation();
       if (e.target.closest('.user-identification')) {
         const userName = name;
-        window.location.href = `../../pages/profileByName/?userName=${userName}`;
+        window.location.href = `../../pages/profile-by-name/?userName=${userName}`;
       }
     })
 

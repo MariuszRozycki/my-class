@@ -38,7 +38,7 @@ export function removePost(path, cardContainer, url, loggedUserName, method, img
 
         if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
           cardContainer.innerHTML = `<p class="remove-message">Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
-        } else if (path === `/pages/profile/` || path === `/pages/profileByName/`) {
+        } else if (path === `/pages/profile/` || path === `/pages/profile-by-name/`) {
           profileCardContainer = cardContainer;
           profileCardContainer.innerHTML = '';
           await displayUserPosts(url, loggedUserName, method, imgNotExists, nameValue, avatarValue, '', path);
