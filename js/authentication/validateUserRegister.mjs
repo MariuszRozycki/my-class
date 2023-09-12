@@ -9,7 +9,6 @@
  * @returns {Object} An object containing 'email' and 'password'. If validation fails, these fields will be empty.
  *
  * @example
- * // Example usage:
  * const userName = document.querySelector('#userName').value;
  * const emailValue = document.querySelector('#email').value;
  * const passwordValue = document.querySelector('#password').value;

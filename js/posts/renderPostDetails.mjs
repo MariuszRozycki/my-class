@@ -4,8 +4,8 @@
  * @async
  *
  * @example
- * // Assuming the current URL is "http://example.com?ID=123"
- * // This function will fetch and render the details of the post with the ID 123.
+ * Assuming the current URL is "http://example.com?ID=123"
+ * This function will fetch and render the details of the post with the ID 123.
  * await renderPostDetails();
  */
 

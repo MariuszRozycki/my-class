@@ -14,7 +14,6 @@ import { displayError } from "../utils/displayError.mjs";
  * @throws Will throw an error if any operation fails.
  * 
  * @example  
- * // Example usage:
  * const url = 'https://api.example.com/profiles';
  * await updateProfile(url);
  */

@@ -7,7 +7,6 @@
  * @returns {string|null} - A JSON string if method is not 'GET' and data is provided, otherwise null.
  * 
  * @example  
- * // Example usage:
  * const method = 'POST';
  * const data = { key: 'value' };
  * const body = createBodyJson(method, data); 

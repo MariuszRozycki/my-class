@@ -8,12 +8,11 @@
  * The object returned will depend on the server's response.
  * 
  * @example
- * // Example usage:
  * const userName = document.querySelector('#userName').value;
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    const user = validateUser(userName, email, password);
-    registerUser(registerUrl, user);
+ * const email = document.querySelector('#email').value;
+ * const password = document.querySelector('#password').value;
+ * const user = validateUser(userName, email, password);
+ * registerUser(registerUrl, user);
  */
 
 import { counter } from "../utils/counter.mjs";

@@ -8,7 +8,6 @@
  * @returns {Object} - An object containing the validated email and password. Empty strings if validation fails.
  * 
  * @example  
- * // Example usage:
  * const email = 'user@noroff.no';
  * const password = 'password123';
  * const validatedUser = validateUserLogIn(email, password);

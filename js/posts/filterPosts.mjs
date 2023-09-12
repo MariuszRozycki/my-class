@@ -2,6 +2,21 @@ import { authWithToken } from "../authentication/authWithToken.mjs";
 import { renderPost } from "./renderPost.mjs";
 import { displayError } from "../utils/displayError.mjs";
 
+
+/**
+ * Filters posts based on user input and dropdown selection.
+ * Fetches all posts and allows the user to filter them by author or sort them.
+ * 
+ * @async
+ * @function filterPosts
+ * @param {string} url - The URL for the posts API endpoint.
+ * @throws Will throw an error if the fetch operation or any other operation fails.
+ * 
+ * @example  
+ * const url = 'https://api.example.com/posts';
+ * await filterPosts(url);  
+ * Fetches and displays posts, allows for filtering.
+ */
 export async function filterPosts(url) {
   try {
     const allPostsHeader = document.getElementById('all-posts-header');
@@ -68,7 +83,7 @@ export async function filterPosts(url) {
       }
     });
   } catch (error) {
-    displayError();
+    displayError(error);
     throw error;
   }
 }

@@ -10,7 +10,6 @@
  * @throws {Error} Throws an error if the API call is unsuccessful.
  *
  * @example
- * // Usage of createPostComment
  * const cardContainer = document.querySelector('.card-container');
  * createPostComment(cardContainer);
  */

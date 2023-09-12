@@ -12,8 +12,7 @@ import { displayError } from "../utils/displayError.mjs";
  * @returns {Promise<{json: Object, status: Object}>} - A Promise that resolves to an object containing the JSON response and status code.
  * @throws Will throw an error if the fetch operation or any other operation fails.
  * 
- * @example  
- * // Example usage:
+ * @example
  * const method = 'GET';
  * const url = 'https://api.example.com/blablabla';
  * const data = { key: 'value' };

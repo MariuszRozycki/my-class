@@ -42,7 +42,6 @@ export function searchHandler() {
  * @throws Will throw an error if the fetch operation or any other operation fails.
  * 
  * @example
- * // Example usage:
  * const event = new Event('input');
  * const inputValue = 'javascript';
  * url = `${baseApi}/posts?_tag=${inputValue}&_author=true&_comments=true`;

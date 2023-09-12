@@ -1,6 +1,16 @@
+/**
+ * Implements a countdown timer that redirects the user to the home page after reaching zero.
+ * The countdown starts from 3 and decrements every second.
+ * 
+ * @function counter
+ * 
+ * @example  
+ * counter(); 
+ * Starts the countdown and eventually redirects to page given in window.location.href.
+ */
+
 export function counter() {
-  console.log('dziala');
-  let counter = 5;
+  let counter = 3;
   const countingDownSuccess = document.querySelector('.counter');
   countingDownSuccess.classList.remove('d-none');
   const countDown = setInterval(() => {

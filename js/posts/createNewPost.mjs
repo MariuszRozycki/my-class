@@ -1,17 +1,3 @@
-/**
- * Function createNewPost submits a new post to the API.
- * It reads values from a form, creates a new post object and sends it using POST method.
- * After the post is successfully created, it clears the form fields.
- * 
- * @async
- * @throws {Error} Throws an error if the API call is unsuccessful.
- * 
- * @example
- * // Usage of createNewPost function
- * createNewPost();
- */
-
-
 /* import functions */
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { postData } from "./postData.mjs";
@@ -21,6 +7,20 @@ import { displayError } from "../utils/displayError.mjs";
 /* import Url */
 import { postsUrl } from "../utils/api.mjs";
 
+/**
+ * Function createNewPost is for creating a new post.
+ * It listens for a submit event on the new post form.
+ * If the form is valid, it sends the data to the server.
+ * If there are errors, it shows them on the form.
+ * 
+ * @async
+ * @function createNewPost
+ * @throws Will throw an error if something goes wrong, like network issues.
+ * 
+ * @example
+ * createNewPost();  
+ * Just call the function and it will do the rest.
+ */
 export async function createNewPost() {
   const method = 'POST';
   const newPostForm = document.querySelector('#new-post-form');

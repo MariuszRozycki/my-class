@@ -7,8 +7,8 @@
  * @throws Will throw an error if the update operation fails.
  * 
  * @example
- * // Call this function on a page where the query string includes a valid post ID, e.g. "?id=123".
- * // This function will populate the update form and handle the update operation when the form is submitted.
+ * Call this function on a page where the query string includes a valid post ID, e.g. "?id=123".
+ * This function will populate the update form and handle the update operation when the form is submitted.
  * await updatePost();
  */
 

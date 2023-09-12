@@ -7,7 +7,6 @@
  * @param {HTMLElement} cardContainer - The DOM element that serves as the container for all posts.
  *
  * @example
- * // Initialize removal functionality on a specified container
  * const path = window.location.pathname;
  * const cardContainer = document.querySelector('.card-container');
  * removePost(path, cardContainer);
