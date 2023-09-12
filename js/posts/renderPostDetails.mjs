@@ -18,11 +18,7 @@ export async function renderPostDetails() {
   const queryString = document.location.search;
   const params = new URLSearchParams(queryString);
   const id = params.get("id");
-
   const postByIdUrl = `${baseApi}/posts/${id}?_author=true&_reactions=true&_comments=true`;
-  console.log(postByIdUrl);
-
-
   const method = 'GET';
   const data = await authWithToken(method, postByIdUrl);
   const json = data.json;

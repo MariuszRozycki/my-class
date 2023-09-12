@@ -19,7 +19,6 @@ import { counter } from "../utils/counter.mjs";
 import { displayError } from "../utils/displayError.mjs";
 
 export async function registerUser(url, userData) {
-  console.log('url in registerUser:', url);
 
   const registerForm = document.querySelector('#register-form');
   const userRegisterFailure = document.querySelector('#user-not-registered');
@@ -37,8 +36,6 @@ export async function registerUser(url, userData) {
 
     const response = await fetch(url, postData);
     const json = await response.json();
-    console.log(json);// console.log --> remove before submitting
-
 
     if (response.ok) {
       userRegisterSuccess.classList.remove('d-none');
@@ -46,9 +43,7 @@ export async function registerUser(url, userData) {
       registerForm.classList.add('position-relative');
       setTimeout(() => {
         counter();
-      }, 1000);
-
-
+      }, 200);
     }
 
     if (!response.ok) {
@@ -85,7 +80,7 @@ export async function registerUser(url, userData) {
         }
       }
     }
-    console.log(json);
+
     return json;
 
   }

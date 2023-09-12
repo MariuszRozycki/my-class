@@ -34,11 +34,9 @@ export async function filterPosts(url) {
 
     function handleFilterOptionChange() {
       if (filterOption.value === '3') {
-        console.log(authorInput);
         authorInput.classList.remove("hidden");
       }
       else {
-        console.log("Setting authorInput to invisible");
         authorInput.classList.add('hidden');
       }
       if (filterOption.value === '2') {

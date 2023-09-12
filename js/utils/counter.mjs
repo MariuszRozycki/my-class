@@ -19,7 +19,6 @@ export function counter() {
   ${counter} sek. left...
   `;
     counter -= 1;
-    console.log(counter);
 
     if (counter < 0) {
       clearInterval(countDown);

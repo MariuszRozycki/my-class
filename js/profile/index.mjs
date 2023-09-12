@@ -6,7 +6,7 @@ import { searchHandler } from "../utils/searchHandler.mjs";
 
 /* import url */
 import { profilesUrl } from "../utils/api.mjs";
-import { baseApi } from "../utils/api.mjs";
+
 
 const path = location.pathname;
 

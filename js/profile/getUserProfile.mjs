@@ -27,7 +27,6 @@ import { baseApi } from "../utils/api.mjs";
 
 
 export async function getUserProfile(userName) {
-  console.log('userName inside getUserProfile:', userName);
   const path = location.pathname;
   try {
     let loggedUser = getLoggedUserName();
@@ -37,8 +36,6 @@ export async function getUserProfile(userName) {
 
     const method = 'GET';
     const profileByNameUrl = `${baseApi}/profiles/${loggedUser}?_followers=true&_following=true&_posts=true`;
-
-    console.log('profileByNameUrl:', profileByNameUrl);
 
     const data = await authWithToken(method, profileByNameUrl);
     const userData = data.json;
@@ -81,7 +78,6 @@ function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
     containerFollowersList.innerHTML = listItems;
 
   }
-  console.log('followers:', followers);
 
   const notExists = `Not exists`;
   const imgNotExists = '../../images/not-img.png';
@@ -107,9 +103,7 @@ function createProfileDataHtml(userData, baseApi, loggedUser, method, path) {
  * @param {string} loggedUser - The username of the logged-in user.
  */
 function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser) {
-  console.log('--> loggedUser displayUserData:', loggedUser);
   const loggedUserHeader = document.querySelector('.profile-of-user');
-  console.log(loggedUserHeader);
   const userDataContainer = document.querySelector('#user-data-container');
   const imgWrapper = createElement('div', 'img-wrapper-profile');
   const bannerImgWrapper = createElement('div', 'banner-img-wrapper');

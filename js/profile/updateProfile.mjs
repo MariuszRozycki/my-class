@@ -57,7 +57,6 @@ export async function updateProfile(url) {
       const dataUrl = mediaProfileData(bannerInputValue, avatarInputValue);
 
       const json = await authWithToken(method, updateProfileUrl, dataUrl);
-      console.log(json);
 
       const jsonBadRequest = json.json.status
 

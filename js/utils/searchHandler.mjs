@@ -67,7 +67,6 @@ async function search(e, inputValue, url) {
     }
     const filterTagEndpoint = await authWithToken(method, url);
     const json = filterTagEndpoint.json;
-    console.log(url);
 
     cardContainer.innerHTML = '';
     allPostsHeader.innerText = 'Searched content:';
@@ -81,7 +80,7 @@ async function search(e, inputValue, url) {
       createPost.classList.remove('d-none');
       const allPost = await authWithToken(method, url);
       const jsonAll = allPost.json;
-      console.log(postsUrl);
+
       renderPost(jsonAll);
 
       allPostsHeader.innerText = 'All posts:';

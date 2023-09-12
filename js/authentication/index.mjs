@@ -40,7 +40,7 @@ export function registerAndLoginHandlers() {
       const email = document.querySelector('#email').value;
       const password = document.querySelector('#password').value;
       const user = validateUserLogIn(email, password);
-      console.log(user);
+
       loginUser(loginUrl, user);
     });
   }

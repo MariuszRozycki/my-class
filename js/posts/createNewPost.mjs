@@ -58,7 +58,6 @@ export async function createNewPost() {
 
         const json = await authWithToken(method, postsUrl, dataValue);
         const jsonBadRequest = json.json.status
-        console.log(jsonBadRequest);
 
         if (jsonBadRequest) {
           const jsonErrors = json.json.errors;

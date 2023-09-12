@@ -74,7 +74,7 @@ async function fetchPosts() {
     const data = await authWithToken(method, postsUrl);
     return data.json;
   } catch (error) {
-    console.error('An error occurred while fetching posts:', error);
+    displayError(error)
     throw error;
   }
 }

@@ -1,3 +1,5 @@
+import { displayError } from "../utils/displayError.mjs";
+
 /**
  * Logs in a user by sending a POST request to the given URL with the provided user data.
  * Stores the access token and user profile data in local storage.
@@ -68,7 +70,7 @@ export async function loginUser(url, userData) {
 
   }
   catch (error) {
-    console.error(error);
+    displayError(error);
     throw error;
   }
 }

@@ -36,7 +36,6 @@ export function createPostComment(cardContainer) {
       const postCommentUrl = `${baseApi}/posts/${id}/comment?_author=true`;
       const method = 'POST';
       const json = await authWithToken(method, postCommentUrl, bodyData);
-      console.log('json in createPostComment()', json);
       const data = json.json;
       cardContainer.innerHTML = '';
       renderPostDetails(data);

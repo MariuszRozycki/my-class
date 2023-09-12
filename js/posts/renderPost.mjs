@@ -110,7 +110,6 @@ export async function renderPost(data) {
       e.stopPropagation();
       if (e.target.closest('.user-identification')) {
         const userName = name;
-        console.log(userName);
         window.location.href = `../../pages/profileByName/?userName=${userName}`;
       }
     })
@@ -135,7 +134,6 @@ export async function renderPost(data) {
     comments.forEach(comment => {
       const { id: commentId, body: commentBody, owner: ownerOfComment } = comment;
       if (comment) {
-        // console.log(comment);
         hasComments = true;
         const commentElement = createElement('li', 'card-text comment-element', '', `${ownerOfComment}`);
         commentElement.setAttribute('data-comment-id', commentId);

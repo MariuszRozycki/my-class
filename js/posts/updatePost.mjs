@@ -15,6 +15,7 @@
 /* import functions */
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { postData } from "./postData.mjs";
+import { displayError } from "../utils/displayError.mjs";
 
 /* import Url */
 import { baseApi } from "../utils/api.mjs";
@@ -27,7 +28,6 @@ export async function updatePost() {
   const updatePostForm = document.querySelector('#update-post-form');
 
   const postByIdUrl = `${baseApi}/posts/${id}?_author=true&_reactions=true&_comments=true`;
-  console.log(postByIdUrl);
 
   const method = 'GET'
   const data = await authWithToken(method, postByIdUrl);
@@ -52,13 +52,13 @@ export async function updatePost() {
       const updateBanner = document.querySelector('#update-post-banner').value || currentPostData.media;
 
       const json = postData(updateTitle, updateTextContent, updateTag, updateBanner);
-      console.log(json);
 
       try {
         const method = 'PUT';
         await authWithToken(method, updateUrl, json);
         window.location = `../../pages/post-details/?id=${id}`;
       } catch (error) {
+        displayError(error);
         throw error;
       }
     });

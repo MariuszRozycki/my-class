@@ -11,7 +11,6 @@ import { updatePost } from "../../js/posts/updatePost.mjs";
 import { postsUrl } from "../utils/api.mjs";
 
 const path = location.pathname;
-console.log(path);
 
 if (path === `/pages/feed/`) {
   getPosts();
@@ -26,5 +25,3 @@ if (path === `/pages/feed/`) {
 } else if (path === `/pages/update/`) {
   updatePost();
 }
-
-
