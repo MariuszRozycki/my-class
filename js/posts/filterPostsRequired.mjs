@@ -13,7 +13,6 @@
 
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { renderPost } from "./renderPost.mjs";
-import { filterPosts } from "./filterPosts.mjs";
 
 export async function filterPostsRequired(url) {
   const cardContainer = document.querySelector('.card-container');

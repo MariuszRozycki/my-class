@@ -14,7 +14,7 @@ const path = location.pathname;
 
 if (path === `/pages/feed/`) {
   getPosts();
-  searchHandler();
+  searchHandler(postsUrl);
   filterPostsRequired(postsUrl);
   filterPosts(postsUrl);
   createNewPost();

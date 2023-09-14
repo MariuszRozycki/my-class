@@ -33,13 +33,6 @@ export function createPostBody(titleCapAbb, bodyToUse, tagsList, dateInNorway) {
   const sanitizedDate = sanitizeBeforeRender(dateInNorway);
 
   const postBody = createElement('div', 'card-body');
-  // postBody.innerHTML = `
-  //       <h5 class="card-title">${sanitizedTitle}</h5>
-  //       <p class="card-text">${sanitizedBody}</p>
-  //       <p class="card-text">Tags: ${sanitizedTags}</p>
-  //       <p class="card-text p-2 mt-3 text-end"><small>Created: ${sanitizedDate}</small></p>
-  //   `;
-
   const postHeader = createElement('h5', 'card-title', `${sanitizedTitle}`);
   postBody.appendChild(postHeader);
   const postContent = createElement('p', 'card-text', `${sanitizedBody}`);
