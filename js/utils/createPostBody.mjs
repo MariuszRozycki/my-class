@@ -1,4 +1,5 @@
 import { createElement } from "./createElement.mjs";
+import { sanitizeBeforeRender } from "./sanitizeBeforeRender.mjs";
 
 /**
  * Function createPostBody creates the body section of a post card.
@@ -26,13 +27,30 @@ export function createPostBody(titleCapAbb, bodyToUse, tagsList, dateInNorway) {
     displayTags = tagsList.split(', ').map(tag => '#' + tag.toLowerCase()).join(', ');
   }
 
+  const sanitizedTitle = sanitizeBeforeRender(titleCapAbb);
+  const sanitizedBody = sanitizeBeforeRender(bodyToUse);
+  const sanitizedTags = sanitizeBeforeRender(displayTags);
+  const sanitizedDate = sanitizeBeforeRender(dateInNorway);
+
   const postBody = createElement('div', 'card-body');
-  postBody.innerHTML = `
-      <h5 class="card-title">${titleCapAbb}</h5>
-      <p class="card-text">${bodyToUse}</p>
-      <p class="card-text">Tags: ${displayTags}</p>
-      <p class="card-text p-2 mt-3 text-end"><small>Created: ${dateInNorway}</small></p>
-  `;
+  // postBody.innerHTML = `
+  //       <h5 class="card-title">${sanitizedTitle}</h5>
+  //       <p class="card-text">${sanitizedBody}</p>
+  //       <p class="card-text">Tags: ${sanitizedTags}</p>
+  //       <p class="card-text p-2 mt-3 text-end"><small>Created: ${sanitizedDate}</small></p>
+  //   `;
+
+  const postHeader = createElement('h5', 'card-title', `${sanitizedTitle}`);
+  postBody.appendChild(postHeader);
+  const postContent = createElement('p', 'card-text', `${sanitizedBody}`);
+  postBody.appendChild(postContent);
+  const postTags = createElement('p', 'card-text', `${sanitizedTags}`);
+  postBody.appendChild(postTags);
+  const postDateWrapper = createElement('p', 'card-text p-2 mt-3 text-end');
+  postBody.appendChild(postDateWrapper);
+  const postDate = createElement('small', '', `Created: ${sanitizedDate}`);
+  postBody.appendChild(postDate);
+
 
   const commentsWrapper = createElement('ul', 'cart-text comments-wrapper');
   const commentsHeader = createElement('li', 'cart-text');
