@@ -4,6 +4,7 @@
  * This function encodes special HTML characters like `&`, `<`, `>`, `"`, and `'` into their respective HTML entities.
  * It also removes potentially dangerous keywords such as 'onerror', 'onload', 'script', 'img', and 'body'.
  *
+ * @function sanitizeBeforeSend
  * @param {string} str - The input string to sanitize.
  * @returns {string} - The sanitized string.
  * @example

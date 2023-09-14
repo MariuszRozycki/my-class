@@ -4,6 +4,7 @@
  * This function removes <script> and <style> tags, HTML comments, and other HTML tags. 
  * It also removes certain potentially dangerous attributes like `onerror`, `onload`, `onclick`, and `onmouseover`.
  *
+ * @function sanitizeBeforeRender
  * @param {string} data - The string containing HTML to sanitize.
  * @returns {string} - The sanitized HTML string.
  * @example
