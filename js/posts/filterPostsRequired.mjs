@@ -3,6 +3,7 @@
  * The function toggles between rendering posts that have comments and rendering all posts.
  *
  * @async
+ * @function filterPostRequired
  * @param {string} url - The API endpoint from which to fetch the posts.
  * @throws {Error} Will propagate any errors that occur during the operation.
  * 
@@ -13,13 +14,9 @@
 
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { renderPost } from "./renderPost.mjs";
-import { filterPosts } from "./filterPosts.mjs";
 
 export async function filterPostsRequired(url) {
   const cardContainer = document.querySelector('.card-container');
-
-  // const activeUrl = `${baseApi}/posts?_tag=travel&_active=true`;
-  // const unActiveUrl = `${baseApi}/posts?_active=false`;
   const postsWithComments = document.querySelector('#posts-with-comments');
   const allPostsRatio = document.querySelector('#all-posts-radio');
   const allPostsHeader = document.getElementById('all-posts-header');
@@ -69,6 +66,3 @@ async function renderPostsAll(method, url, cardContainer, allPostsHeader) {
     renderPost(post);
   }
 }
-
-// &_active=true
-// ${baseApi}/posts?_author=true&_reactions=true&_comments=true`;

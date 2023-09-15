@@ -31,8 +31,6 @@ import { createPostBody } from "../utils/createPostBody.mjs";
 import { createUserIdentification } from "../utils/createUserIdentification.mjs";
 import { createCommentForm } from "../utils/createCommentForm.mjs";
 import { removeComment } from "./removeComment.mjs";
-import { getProfileByName } from "../profile/getProfileByName.mjs";
-import { baseApi } from "../utils/api.mjs";
 
 export async function renderPost(data) {
 

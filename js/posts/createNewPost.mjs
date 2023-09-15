@@ -1,4 +1,5 @@
 /* import functions */
+import { sanitizeBeforeSend } from "../utils/sanitizeBeforeSend.mjs";
 import { authWithToken } from "../authentication/authWithToken.mjs";
 import { postData } from "./postData.mjs";
 import { getPosts } from "./getPosts.mjs";
@@ -42,10 +43,10 @@ export async function createNewPost() {
       const contentError = document.querySelector('.new-post-content-error');
       const tagError = document.querySelector('.new-post-tag-error');
 
-      const newTitleValue = newTitle.value;
-      const newTextContentValue = newTextContent.value;
-      const newTagValue = newTag.value.toLowerCase();
-      const newBannerValue = newBanner.value;
+      const newTitleValue = sanitizeBeforeSend(newTitle.value);
+      const newTextContentValue = sanitizeBeforeSend(newTextContent.value);
+      const newTagValue = sanitizeBeforeSend(newTag.value.toLowerCase());
+      const newBannerValue = sanitizeBeforeSend(newBanner.value);
 
       const dataValue = postData(newTitleValue, newTextContentValue, newTagValue, newBannerValue);
 

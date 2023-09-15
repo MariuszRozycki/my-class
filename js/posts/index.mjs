@@ -4,7 +4,7 @@ import { getPosts } from "./getPosts.mjs";
 import { filterPostsRequired } from "./filterPostsRequired.mjs";
 import { filterPosts } from "./filterPosts.mjs";
 import { renderPostDetails } from "./renderPostDetails.mjs";
-import { searchHandler } from "../utils/searchHandler.mjs";
+import { searchPostsContent } from "./searchPostsContent.mjs";
 import { updatePost } from "../../js/posts/updatePost.mjs";
 
 /* imported Url */
@@ -14,7 +14,7 @@ const path = location.pathname;
 
 if (path === `/pages/feed/`) {
   getPosts();
-  searchHandler();
+  searchPostsContent(postsUrl);
   filterPostsRequired(postsUrl);
   filterPosts(postsUrl);
   createNewPost();
