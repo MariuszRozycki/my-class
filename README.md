@@ -9,4 +9,11 @@
 5. Start watching for changes and launch the live server with `npm run watch`.
 6. Creating and watching JSDocs `npm run docs`.
 
+## Trello Board link:
+
+- https://trello.com/invite/b/PRGIDvbN/ATTI07ddae3921f9c1ad66e0fdc19ff5c269278A44D8/myclass
+
+
+## Live site:
+- https://coruscating-melomakarona-28cd35.netlify.app/
 
