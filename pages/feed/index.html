@@ -97,20 +97,21 @@
             <option selected>View posts by:</option>
             <option value="1">From newest post</option>
             <option value="2">From oldest post</option>
-            <option value="3">By author</option>
+            <option value="3">Search posts by author</option>
+            <option value="4">Search posts by tag</option>
           </select>
-          <input type="text" id="authorInput" class="hidden form-control form-control-sm mt-2"
+          <input type="text" id="filter-input" class="d-none form-control form-control-sm mt-2"
             placeholder="Enter author name">
         </div>
 
         <div class="col-12 col-sm-5 pb-3">
+          <input class="form-radio" type="radio" id="all-posts-radio" name="filter-posts" value="All posts" checked />
+          <label for="all-posts-radio">All posts</label><br>
           <input class="form-radio" type="radio" id="posts-with-tags" name="filter-posts" value="Posts with tags" />
           <label for="posts-with-tags">Posts with tags</label><br>
           <input class="form-radio" type="radio" id="posts-with-comments" name="filter-posts"
             value="Posts with comments" />
-          <label for="posts-with-comments">Posts with comments</label><br>
-          <input class="form-radio" type="radio" id="all-posts-radio" name="filter-posts" value="All posts" checked />
-          <label for="all-posts-radio">All posts</label>
+          <label for="posts-with-comments">Posts with comments</label>
         </div>
       </div>
     </div>

@@ -22,18 +22,18 @@ export async function filterPostsRequired(url) {
   const allPostsRatio = document.querySelector('#all-posts-radio');
   const allPostsHeader = document.getElementById('all-posts-header');
   const filterOption = document.getElementById('filterOption');
-  const authorInput = document.getElementById('authorInput');
+  const filterInput = document.getElementById('filter-input');
   const method = 'GET';
 
   try {
     postWithTags.addEventListener('click', function () {
-      postWithTagsFilter(method, url, cardContainer, allPostsHeader, filterOption, authorInput);
+      postWithTagsFilter(method, url, cardContainer, allPostsHeader, filterOption, filterInput);
     });
     postsWithComments.addEventListener('click', function () {
-      renderPostsComments(method, url, cardContainer, allPostsHeader, filterOption, authorInput);
+      renderPostsComments(method, url, cardContainer, allPostsHeader, filterOption, filterInput);
     });
     allPostsRatio.addEventListener('click', function () {
-      renderPostsAll(method, url, cardContainer, allPostsHeader);
+      renderPostsAll(method, url, cardContainer, allPostsHeader, filterOption, filterInput);
     });
 
   } catch (error) {
@@ -42,31 +42,30 @@ export async function filterPostsRequired(url) {
 }
 
 
-async function postWithTagsFilter(method, url, cardContainer, allPostsHeader) {
+async function postWithTagsFilter(method, url, cardContainer, allPostsHeader, filterOption, filterInput) {
   const data = await authWithToken(method, url);
   const json = data.json;
 
   allPostsHeader.innerText = 'Posts with tags:';
   filterOption.classList.add('d-none');
-  authorInput.classList.add('hidden');
+  filterInput.classList.add('d-none');
   cardContainer.innerHTML = '';
 
   const postsWithTags = json.filter(post => post.tags && post.tags.length > 0 && post.tags[0] !== '');
 
   for (let post of postsWithTags) {
-    console.log(post);
     renderPost(post);
   }
 }
 
 
-async function renderPostsComments(method, url, cardContainer, allPostsHeader) {
+async function renderPostsComments(method, url, cardContainer, allPostsHeader, filterOption, filterInput) {
   const data = await authWithToken(method, url);
   const json = data.json;
 
   allPostsHeader.innerText = 'Posts with comments:';
   filterOption.classList.add('d-none');
-  authorInput.classList.add('hidden');
+  filterInput.classList.add('d-none');
   cardContainer.innerHTML = '';
 
   const postsWithComments = json.filter(post => post.comments && post.comments.length > 0);
@@ -77,16 +76,19 @@ async function renderPostsComments(method, url, cardContainer, allPostsHeader) {
 }
 
 
-async function renderPostsAll(method, url, cardContainer, allPostsHeader) {
+async function renderPostsAll(method, url, cardContainer, allPostsHeader, filterOption, filterInput) {
   const data = await authWithToken(method, url);
   const json = data.json;
 
   allPostsHeader.innerText = 'All posts:'
   filterOption.classList.remove('d-none');
-  authorInput.classList.remove('hidden');
+  if (filterOption.value === '3' || filterOption.value === '4') {
+    filterInput.classList.remove('d-none');
+  } else {
+    filterInput.classList.add('d-none');
+  }
   cardContainer.innerHTML = '';
   for (let post of json) {
-    console.log(post);
     renderPost(post);
   }
 }

@@ -4,80 +4,95 @@ import { displayError } from "../utils/displayError.mjs";
 
 
 /**
- * Filters posts based on user input and dropdown selection.
- * Fetches all posts and allows the user to filter them by author or sort them.
- * 
+ * Filters and renders blog posts based on the selected filter option and filter input value.
  * @async
- * @function filterPosts
- * @param {string} url - The URL for the posts API endpoint.
- * @throws Will throw an error if the fetch operation or any other operation fails.
- * 
- * @example  
- * const url = 'https://api.example.com/posts';
- * await filterPosts(url);  
- * Fetches and displays posts, allows for filtering.
+ * @param {string} url - The API endpoint URL to fetch the blog posts.
+ * @throws Will throw an error if any step in the function fails.
  */
+
 export async function filterPosts(url) {
   try {
     const allPostsHeader = document.getElementById('all-posts-header');
     const filterOption = document.getElementById('filterOption');
-    const authorInput = document.getElementById('authorInput');
+    const filterInput = document.getElementById('filter-input');
     const cardContainer = document.querySelector('.card-container');
+    let json;
 
-    filterOption.addEventListener('change', function () {
-      handleFilterOptionChange();
-    });
+    const method = 'GET';
+    const data = await authWithToken(method, url);
+    json = data.json;
 
-    filterOption.addEventListener('click', function () {
-      handleFilterOptionChange();
-    });
+    filterInput.removeEventListener('input', handleInput);
+    filterInput.addEventListener('input', handleInput);
+    filterOption.addEventListener('change', handleFilterOptionChange);
+    filterOption.addEventListener('click', handleFilterOptionChange);
 
-    function handleFilterOptionChange() {
+
+    /**
+     * Handles input events on the filter input field.
+     * Filters the posts by author or tag based on the input and renders them.
+     */
+    async function handleInput() {
+      const inputValue = this.value.toLowerCase();
+      let filteredPosts;
+
       if (filterOption.value === '3') {
-        authorInput.classList.remove("hidden");
+        filteredPosts = json.filter(post => {
+          const { author: { name } } = post;
+          return name.toLowerCase().includes(inputValue);
+        });
+        allPostsHeader.innerText = 'Filtered by author:';
+        cardContainer.innerHTML = '';
+        renderPost(filteredPosts);
       }
-      else {
-        authorInput.classList.add('hidden');
+      else if (filterOption.value === '4') {
+        filteredPosts = json.filter(post => {
+          const { tags } = post;
+          const postTags = tags ? tags.some(tag => tag.toLowerCase().includes(inputValue)) : false;
+          return postTags;
+        });
+        allPostsHeader.innerText = 'Filtered by tag:';
+        cardContainer.innerHTML = '';
+        renderPost(filteredPosts);
       }
+
+      if (this.value === '') {
+        allPostsHeader.innerText = 'All posts:';
+        renderPost(json);
+      }
+    }
+
+
+    /**
+     * Handles change and click events on the filter option dropdown.
+     * Updates the UI based on the selected filter option.
+     */
+    function handleFilterOptionChange() {
+      if (filterOption.value === '3' || filterOption.value === '4') {
+        filterInput.classList.remove('d-none');
+      } else {
+        filterInput.classList.add('d-none');
+      }
+
+      if (filterOption.value === '3') {
+        filterInput.placeholder = 'Enter author name';
+      } else if (filterOption.value === '4') {
+        filterInput.placeholder = 'Enter tag';
+      }
+
       if (filterOption.value === '2') {
         const reversedPosts = [...json].reverse();
-
         cardContainer.innerHTML = '';
         renderPost(reversedPosts);
-      }
-      else if (filterOption.value === '1') {
-
+      } else if (filterOption.value === '1') {
         cardContainer.innerHTML = '';
         renderPost(json);
       }
     }
 
-    const method = 'GET';
-    const data = await authWithToken(method, url);
-    const json = data.json;
-
-    authorInput.addEventListener('input', function () {
-      const inputValue = this.value.toLowerCase();
-
-      const filteredPosts = json.filter(post => {
-        const { author: { name } } = post;
-
-        return name.toLowerCase().includes(inputValue);
-      });
-
-      allPostsHeader.innerText = 'Filtered by author:'
-      cardContainer.innerHTML = '';
-
-      if (this.value === '') {
-        allPostsHeader.innerText = 'All posts:';
-      }
-
-      renderPost(filteredPosts);
-    });
-
     document.addEventListener('click', function (e) {
-      if (e.target !== authorInput && e.target !== filterOption) {
-        authorInput.value = '';
+      if (e.target !== filterInput && e.target !== filterOption) {
+        filterInput.value = '';
       }
     });
   } catch (error) {
