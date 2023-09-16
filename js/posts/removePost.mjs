@@ -17,6 +17,8 @@ import { baseApi, postsUrl } from "../utils/api.mjs";
 import { renderPost } from "./renderPost.mjs";
 import { displayUserPosts } from "../profile/getUserProfile.mjs";
 import { displayError } from "../utils/displayError.mjs";
+import { createElement } from "../utils/createElement.mjs";
+import { createButton } from "../utils/createButton.mjs";
 
 let isDeletingInProgress = false;
 
@@ -24,6 +26,9 @@ export function removePost(path, cardContainer, url, loggedUserName, method, img
   let profileCardContainer;
 
   const removePostButtons = document.querySelectorAll('.remove-post-button');
+  const secondNavContainer = document.querySelector('.container-second-nav');
+  const secondNavItems = document.querySelectorAll('.second-nav-item');
+  const addNevPost = document.querySelector('#add-new-post');
 
   removePostButtons.forEach(button => {
     button.addEventListener('click', async () => {
@@ -37,7 +42,25 @@ export function removePost(path, cardContainer, url, loggedUserName, method, img
         const posts = await fetchPosts();
 
         if (path === `/pages/post-details/` || path === `/pages/create-post/`) {
+          secondNavItems.forEach(item => {
+            item.classList.add('d-none');
+          });
           cardContainer.innerHTML = `<p class="remove-message">Post with postId=${button.getAttribute('data-id')} has been removed forever.</p>`;
+          const buttonWrap = createElement('li', 'go-to-feed-li');
+          const goToFeedBtn = createButton('go-to-feed-btn btn btn-my', '', 'Go to feed');
+          secondNavContainer.append(buttonWrap);
+          buttonWrap.append(goToFeedBtn);
+          goToFeedBtn.onclick = () => { window.location.href = '../../pages/feed/'; };
+
+          if (path === `/pages/create-post/`) {
+            addNevPost.addEventListener('click', () => {
+              secondNavItems.forEach(item => {
+                item.classList.remove('d-none');
+                buttonWrap.remove();
+              });
+            })
+          }
+
         } else if (path === `/pages/profile/` || path === `/pages/profile-by-name/`) {
           profileCardContainer = cardContainer;
           profileCardContainer.innerHTML = '';

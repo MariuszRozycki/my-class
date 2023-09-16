@@ -17,12 +17,22 @@ import { createElement } from "./createElement.mjs";
  */
 
 export function createUserIdentification(nameCapAbb, avatarValue) {
+
   const userIdentification = createElement('div', 'user-identification d-flex justify-content-start align-items-center');
-  userIdentification.innerHTML = `
-      <div class="avatar-img-wrapper">
-          <img class="rounded-circle border border-3 border-warning" src="${avatarValue}">
-      </div>
-      <p class="card-text p-2 text-wrap text-break text-start"><small>@${nameCapAbb}</small></p>
-  `;
+
+  const userIdentificationAvatarWrap = createElement('div', 'avatar-img-wrapper');
+  const userIdentificationAvatar = createElement('img', 'rounded-circle border border-3 border-warning');
+
+  userIdentificationAvatar.setAttribute('src', `${avatarValue}`);
+  userIdentificationAvatar.setAttribute('alt', `Avatar of: ${nameCapAbb}`);
+
+  const userIdentificationNameWrap = createElement('p', 'card-text p-2 text-wrap text-break text-start');
+  const userIdentificationName = createElement('small', '', `${nameCapAbb}`);
+
+  userIdentification.prepend(userIdentificationAvatarWrap);
+  userIdentificationAvatarWrap.append(userIdentificationAvatar);
+  userIdentification.append(userIdentificationNameWrap);
+  userIdentificationNameWrap.append(userIdentificationName);
+
   return userIdentification;
 }

@@ -109,8 +109,10 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
   const bannerImgWrapper = createElement('div', 'banner-img-wrapper');
   const bannerImg = createElement('img');
   bannerImg.src = bannerValue;
+  bannerImg.alt = `It's banner of: ${nameValue}`;
   const profileImg = createElement('img');
   profileImg.src = avatarValue;
+  profileImg.alt = `Profile img of: ${nameValue}`;
   const userProfileDataWrap = createElement('div', 'user-profile-data-wrap');
   const updateProfileBtn = createButton('btn btn-my profile-btn', '', 'Update profile');
   const userName = createElement('p', 'user-name');
@@ -122,7 +124,7 @@ function displayUserData(nameValue, bannerValue, avatarValue, email, loggedUser)
 
   const nameCapAbb = abbreviateAndCapitalize(nameValue);
   loggedUserHeader.innerHTML = '@' + nameCapAbb + '<br>' + 'profile';
-  console.log(nameCapAbb);
+
   if (loggedUser && loggedUser === getLoggedUserName()) {
     loggedUserHeader.innerText = `My Profile`;
     userProfileDataWrap.appendChild(updateProfileBtn);
@@ -159,6 +161,7 @@ export async function displayUserPosts(url, loggedUser, method, imgNotExists, na
   const postsByNameUrl = `${url}/${loggedUser}/posts?_author=true&_reactions=true&_comments=true`;
   const data = await authWithToken(method, postsByNameUrl);
   const posts = data.json;
+
   const profileCardContainer = document.querySelector('.card-container');
 
   if (posts.length === 0) {
@@ -200,6 +203,7 @@ export async function displayUserPosts(url, loggedUser, method, imgNotExists, na
 
     const imgWrapper = createImgWrapper(mediaValue, titleCapAbb);
     const userIdentification = createUserIdentification(nameCapAbb, avatarValue);
+
     const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyCapAbb, tagsList, dateInNorway);
 
     if (loggedUser && loggedUser === getLoggedUserName()) {

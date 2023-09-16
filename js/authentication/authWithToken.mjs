@@ -4,14 +4,14 @@ import { displayError } from "../utils/displayError.mjs";
 
 /**
  * Authenticates a request with a token and performs an HTTP request.
- * 
+ *
  * @function authWithToken
  * @param {string} method - The HTTP method ('GET', 'PUT', 'POST', 'DELETE').
  * @param {string} url - The URL for the request, used to generate a token.
  * @param {Object} [data] - Optional data to be sent in the request body.
  * @returns {Promise<{json: Object, status: Object}>} - A Promise that resolves to an object containing the JSON response and status code.
  * @throws Will throw an error if the fetch operation or any other operation fails.
- * 
+ *
  * @example
  * const method = 'GET';
  * const url = 'https://api.example.com/blablabla';
@@ -46,6 +46,5 @@ export async function authWithToken(method, url, data) {
   } catch (error) {
     displayError(error);
     throw error;
-
   }
 }

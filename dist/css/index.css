@@ -12052,6 +12052,15 @@ li {
   display: none;
 }
 
+.go-to-feed-li {
+  margin-top: 10px;
+  order: -1;
+}
+
+.go-to-feed-btn:hover {
+  color: black;
+}
+
 .second-nav-item a {
   text-decoration: none;
 }

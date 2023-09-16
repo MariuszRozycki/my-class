@@ -87,9 +87,7 @@ export async function renderPost(data) {
     const imgWrapper = createImgWrapper(mediaValue, title);
     const userIdentification = createUserIdentification(nameCapAbb, avatarValue);
 
-
     const bodyToUse = (path === `/pages/post-details/`) ? bodyCapAbb : bodyCapAbbThreeDots;
-
 
     const { postBody, commentsWrapper } = createPostBody(titleCapAbb, bodyToUse, tagsList, dateInNorway);
 
