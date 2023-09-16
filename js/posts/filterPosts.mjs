@@ -39,7 +39,7 @@ export async function filterPosts(url) {
       if (filterOption.value === '3') {
         filteredPosts = json.filter(post => {
           const { author: { name } } = post;
-          return name.toLowerCase().includes(inputValue);
+          return name ? name.toLowerCase().includes(inputValue) : false;
         });
         allPostsHeader.innerText = 'Filtered by author:';
         cardContainer.innerHTML = '';
