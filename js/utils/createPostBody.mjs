@@ -20,7 +20,6 @@ import { sanitizeBeforeRender } from "./sanitizeBeforeRender.mjs";
 
 export function createPostBody(titleCapAbb, bodyToUse, tagsList, dateInNorway) {
   let displayTags;
-
   if (tagsList === '') {
     displayTags = 'No tags added';
   } else {

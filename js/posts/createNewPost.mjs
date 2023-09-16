@@ -26,6 +26,8 @@ export async function createNewPost() {
   const method = 'POST';
   const newPostForm = document.querySelector('#new-post-form');
   const sectionPosts = document.querySelector('.posts');
+  const path = location.pathname;
+  const allPostsRadio = document.querySelector('#all-posts-radio');
 
   if (!newPostForm.dataset.listenerAdded) {
     newPostForm.addEventListener('submit', async (e) => {
@@ -106,6 +108,10 @@ export async function createNewPost() {
         if (!isTitleError) titleError.classList.add('hidden');
         if (!isContentError) contentError.classList.add('hidden');
         if (!isTagError) tagError.classList.add('hidden');
+
+        if (path === `/pages/feed/`) {
+          allPostsRadio.checked = true;
+        }
 
       } catch (error) {
         displayError(error);
