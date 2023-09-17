@@ -1,4 +1,5 @@
-![MyClass-GitHubPic](https://github.com/MariuszRozycki/my-class/assets/55709542/369549ec-fd3f-4508-ac9d-f560fb4beb3f)
+
+![prt-sc_my-class](https://github.com/MariuszRozycki/my-class/assets/55709542/9e4ae893-5107-4133-a412-c1717833a9b3)
 
 
 
