@@ -1,5 +1,6 @@
 
-![MyClass-GitHubPic](https://github.com/MariuszRozycki/my-class/assets/55709542/75b3a851-7d93-4a90-b099-23a4a104746f)
+![Uploading MyClass-GitHubPic.png…]()
+
 
 # My-class-JS2
 
