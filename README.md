@@ -4,6 +4,7 @@
 
 
 # My-class-JS2
+In the 'my-class' project, I leveraged JavaScript to build a dynamic front-end for a social media platform, ensuring an engaging user experience with features like registration, content viewing, posting, editing, and deletion. I integrated the application with a backend API using authorization via JWT, employing HTTP methods such as GET, POST, PUT, and DELETE to interact with the social media content. The project's user interface was designed to be intuitive and responsive, with added functionalities for content filtering, searching, and secure token handling through localStorage.
 
 ## To run project:
 
